@@ -1,0 +1,46 @@
+{% extends 'web_app/base.html' %}
+{% load static %}
+
+	
+	{% block content %}
+	
+		{% for tanecnik in tanecnik %}
+		<img src="{{tanecnik.foto_tanecnik.url}}">
+
+		<h1 class="title">{{tanecnik.jmeno}} {{tanecnik.prijmeni}}</h1>
+		
+		<h4 class="title">{{tanecnik.jmeno}} {{tanecnik.prijmeni}}</h4>
+
+		<h4 class="title">{{tanecnik.jmeno}} {{tanecnik.prijmeni}}</h4>
+		<h4 class="title">{{tanecnik.jmeno}} {{tanecnik.prijmeni}}</h4>
+		<h4 class="title">{{tanecnik.jmeno}} {{tanecnik.prijmeni}}</h4>
+		<h4 class="title">{{tanecnik.jmeno}} {{tanecnik.prijmeni}}</h4>
+		<h4 class="title">{{tanecnik.jmeno}} {{tanecnik.prijmeni}}</h4>
+		<h4 class="title">{{tanecnik.jmeno}} {{tanecnik.prijmeni}}</h4>
+		<h4 class="title">{{tanecnik.jmeno}} {{tanecnik.prijmeni}}</h4>
+		<h4 class="title">{{tanecnik.jmeno}} {{tanecnik.prijmeni}}</h4>
+		<h4 class="title">{{tanecnik.Dny_do_nove_registrace }} </h4>
+
+
+		{% endfor %}
+	{% endblock %}
+
+"""
+	klub = models.ForeignKey(Klub, on_delete=models.CASCADE)
+	foto_tanecnik = models.ImageField('Fotografie', upload_to='foto_tanecnik', default='foto_tanecnik/profile_pic.jpg')
+	jmeno = models.CharField('Jméno', max_length=255, blank=False)
+	prijmeni = models.CharField('Příjmení',max_length=255, blank=False)
+	datum_narozeni = models.DateField('Datum narození', blank=False)
+	rodne_cislo = models.IntegerField('Rodné číslo', blank=False)
+	email = models.EmailField('Email', blank=False)
+	telefon = models.CharField('Telefonní číslo', max_length=255, blank=False)
+	zdravotni_prohlidka = models.DateField('Zdravotní prohlídka DO: ', blank=False)
+	zdravotni_prohlidka_potvr = models.FileField('Zdravotní prohlídka')
+	pas = models.FileField('Kopie pasu')
+	doping = models.FileField('Dopingove prohlašení')
+	datum_registrace = models.DateField(date.today())
+	registrace_do = models.DateField(date.today().year+1)
+	registr_wrrc = models.BooleanField('Registrace wrrc', default=False)
+	registr_csar = models.BooleanField('Registrace csar', default=False)
+	registr_zavodni_csar = models.BooleanField('Zavodni registrace', default=False)
+"""
