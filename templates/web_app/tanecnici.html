@@ -2,9 +2,10 @@
 {% load static %}
 {% block content %}
 	
-		
+		{% for tanecnik in tanecnici_klub %}
 		<img class="profile_foto" src="{{tanecnik.foto_tanecnik.url}}">
-	<h4 class="title">{{tanecnik.jmeno}} {{tanecnik.prijmeni}} - {{tanecnik.id}}</h4>
+
+		<h4 class="title">{{tanecnik.jmeno}} {{tanecnik.prijmeni}} - {{tanecnik.id}}</h4>
 		
 		<h4 class="title">{{tanecnik.klub}}</h4>
 
@@ -14,7 +15,6 @@
 		<h4 class="title">telefon: {{tanecnik.telefon}} </h4>
 		<h4 class="title">zdravotni prohlidka do: {{tanecnik.zdravotni_prohlidka}}</h4>
 	
-
 			{% if tanecnik.Dny_do_nove_registrace_csar == "Registrace ČSAR vypršela." %}
 			<h4 class="noreg">{{tanecnik.Dny_do_nove_registrace_csar }} </h4>
 			{% else %}
@@ -35,5 +35,9 @@
 
 	
 
+		{% endfor %}
 {% endblock %}
 
+
+
+	

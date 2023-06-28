@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 from datetime import date
+from datetime import datetime
 
 
 Klub = get_user_model()
@@ -33,23 +34,59 @@ class Tanecnik(models.Model):
 	email = models.EmailField('Email', blank=False)
 	telefon = models.CharField('Telefonní číslo', max_length=255, blank=False)
 	zdravotni_prohlidka = models.DateField('Zdravotní prohlídka DO: ', blank=False)
-	zdravotni_prohlidka_potvr = models.FileField('Zdravotní prohlídka', upload_to='zdravotni_prohlidka')
-	pas = models.FileField('Kopie pasu', upload_to='kopie_pasu')
-	doping = models.FileField('Dopingove prohlašení', upload_to='dopingove_prohlaseni')
-	datum_registrace = models.DateField(date.today())
-	registrace_do = models.DateField(date.today().day+364)
-	registr_wrrc = models.BooleanField('Registrace wrrc', default=False)
-	registr_csar = models.BooleanField('Registrace csar', default=False)
-	registr_zavodni_csar = models.BooleanField('Zavodni registrace', default=False)
+	zdravotni_prohlidka_potvr = models.FileField('Zdravotní prohlídka', upload_to='zdravotni_prohlidka', blank=True)
+	pas = models.FileField('Kopie pasu', upload_to='kopie_pasu', blank=True)
+	doping = models.FileField('Dopingove prohlašení', upload_to='dopingove_prohlaseni', blank=True)
+	
 
+
+	registr_csar = models.BooleanField('Registrace csar', default=False, null=True)
+	datum_registrace = models.DateField(date.today(), null=True, blank=True)
+	registrace_do = models.DateField(date.today().day+364, null=True, blank=True)
+	
+	
+	registr_zavodni_csar = models.BooleanField('Zavodni registrace', default=False, null=True)
+	datum_zavodni_registrace_csar = models.DateField(date.today(), null=True, blank=True)
+	zavodni_registrace_do = models.DateField(date.today().day+364, null=True, blank=True)
+	
+
+	registr_wrrc = models.BooleanField('Registrace wrrc', default=False, null=True)
+	datum_registrace_wrrc = models.DateField(date.today(), null=True, blank = True)
+	registrace_wrrc_do = models.DateField(date.today().day+364, null=True, blank=True)
+	
+	
 
 	def __str__(self):
 		return self.jmeno + " " + self.prijmeni + " " + str(self.datum_narozeni) + " " + str(self.rodne_cislo)
 
 
 	@property
-	def Dny_do_nove_registrace(self):
+	def Dny_do_nove_registrace_csar(self):
 		dnes = date.today()
-		dny_do_nove_registrace = self.registrace_do - dnes
-		stripped_dny = str(dny_do_nove_registrace).split(",",1)[0]
+		if self.registrace_do <= dnes:
+			stripped_dny = "Registrace ČSAR vypršela."
+		else:
+			dny_do_nove_registrace = self.registrace_do - dnes
+			stripped_dny = str(dny_do_nove_registrace).split(" ",1)[0] + " d."
+		return stripped_dny
+
+
+	@property
+	def Dny_do_nove_zav_registrace_csar(self):
+		dnes = date.today()
+		if self.zavodni_registrace_do <= dnes:
+			stripped_dny = "Zavodní registrace ČSAR vypršela."
+		else:
+			dny_do_nove_zav_registrace = self.zavodni_registrace_do - dnes
+			stripped_dny = str(dny_do_nove_zav_registrace).split(" ",1)[0] + " d."
+		return stripped_dny
+
+	@property
+	def Dny_do_nove_registrace_wrrc(self):
+		dnes = date.today()
+		if self.registrace_wrrc_do <= dnes:
+			stripped_dny = "Registrace WRRC vypršela."
+		else:
+			dny_do_nove_wrrc_registrace = self.registrace_wrrc_do - dnes
+			stripped_dny = str(dny_do_nove_wrrc_registrace).split(" ",1)[0] + " d."
 		return stripped_dny

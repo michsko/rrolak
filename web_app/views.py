@@ -11,10 +11,15 @@ def home(request):
 
 
 
+def tanecnici(request):
 
-def tanecnik(request):
+	tanecnici_klub = Tanecnik.objects.all()
+	
+	return render(request, "web_app/tanecnici.html", {'tanecnici_klub' : tanecnici_klub,})
 
-	tanecnik = Tanecnik.objects.all()
+
+def tanecnik(request, pk):
+
+	tanecnik = Tanecnik.objects.get(id=pk)
 	
 	return render(request, "web_app/tanecnik.html", {'tanecnik' : tanecnik,})
-
