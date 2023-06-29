@@ -1,0 +1,83 @@
+{% extends 'web_app/base.html' %}
+{% load static %}
+{% block content %}
+
+
+<div class="container mb" style=" min-height: 100vh; min-width: 90vw;">
+  <h2>Tanečníci-přehled</h2>
+  <p>Toto je přehled všech tanečníků ČSAR ve všech registrovaných klubech ČR.</p>            
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Klub</th>
+        <th>Fotografie</th>
+        <th>Jméno</th>
+        <th>Příjmení</th>
+        <th>Dat.narození</th>
+        <th>Rodné č.</th>
+        <th>Email</th>
+        <th>Telefon</th>
+        <th>Zdravotní-p.</th>
+        <th>ZP</th>
+        <th>Kopie pasu</th>
+        <th>Doping</th>
+        <th>CSAR</th>
+        <th>Zavody CSAR</th>
+        <th>WRRC</th>
+        <th>Profil</th>
+
+        
+      </tr>
+    </thead>
+    
+      {% for tanecnik in tanecnici_prehled %}
+      <tbody>  
+      <tr>
+        <td>{{tanecnik.klub}}</td>
+        <td><img src="{{tanecnik.foto_tanecnik.url}}" class="card-img-top" alt="profile photo" style="width: 35px; height: 35px; border-radius: 15px; padding: 2px;"></td>
+        <td>{{tanecnik.jmeno}}</td>
+        <td>{{tanecnik.prijmeni}}</td>
+        <td>{{tanecnik.datum_narozeni|date:"Y-m-d"}}</td>
+        <td>{{tanecnik.rodne_cislo}}</td>
+        <td>{{tanecnik.email}} </td>
+        <td>{{tanecnik.telefon}}</td>
+        <td>{{tanecnik.zdravotni_prohlidka}}</td>
+        <td><button type="button" class="btn btn-secondary">ZP-stáhnout</button></td>
+        <td><button type="button" class="btn btn-secondary">PAS-stáhnout</button></td>
+        <td><button type="button" class="btn btn-secondary">DOPING-stáhnout</button></td>
+        {% if tanecnik.Dny_do_nove_registrace_csar == "Registrace ČSAR vypršela." %}
+        <td><p class="card-text noreg"><b>N</b></p></td>
+        {% else %}
+        <td><p class="card-textv reg"><b>R</b></p></td>
+        {% endif %}
+
+        {% if tanecnik.Dny_do_nove_zav_registrace_csar == "Zavodní registrace ČSAR vypršela." %}
+        <td><p class="card-text noreg"><b>N</b></p></td>
+        {% else %}
+        <td><p class="card-text reg"><b>R</b></p></td>
+        {% endif %}
+
+        {% if tanecnik.Dny_do_nove_registrace_wrrc == "Registrace WRRC vypršela." %}
+        <td><p class="card-text noreg"><b>N</b></p></td>
+        {% else %}
+        <td><p class="card-text reg"><b>R</b></p></td>
+        {% endif %}
+
+        <td><a href="{% url 'tanecnik' tanecnik.id %}" class="btn btn-secondary">Profil</a></td>
+        
+      </tr>
+      
+        
+      
+    </tbody>
+    {% endfor %}
+  </table>
+</div>
+
+
+    
+{% endblock %}
+
+
+
+    

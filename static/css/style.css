@@ -1,4 +1,6 @@
 
+/* profile cards styling */
+
 .noreg {
 	color:red;
 }
@@ -7,6 +9,3 @@
 	color:green;
 }
 
-.profile_foto {
-	size: 150px;
-}

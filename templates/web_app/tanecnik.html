@@ -2,38 +2,58 @@
 {% load static %}
 {% block content %}
 	
-		
-		<img class="profile_foto" src="{{tanecnik.foto_tanecnik.url}}">
-	<h4 class="title">{{tanecnik.jmeno}} {{tanecnik.prijmeni}} - {{tanecnik.id}}</h4>
-		
-		<h4 class="title">{{tanecnik.klub}}</h4>
 
-		<h4 class="title"> datum narozeni: </h4>
-		<h4 class="title">rodne cislo: {{tanecnik.rodne_cislo}} </h4>
-		<h4 class="title">email: {{tanecnik.email}} </h4>
-		<h4 class="title">telefon: {{tanecnik.telefon}} </h4>
-		<h4 class="title">zdravotni prohlidka do: {{tanecnik.zdravotni_prohlidka}}</h4>
-	
+<div class="container" style=" min-height: 100vh;">
+	<br/><br/><br/>
+	<h3 class="">&nbsp;&nbsp;<b>{{tanecnik.klub}}</b></h3><br>
+		<div class="card shadow" style="max-width: 1000px; margin: 10px;">
+			 <div class="row g-0">
+				<div class="col-md-4">
+					<img class="img=fluid " src="{{tanecnik.foto_tanecnik.url}}" style="width: 250px; height: 250px; border-radius: 125px; padding: 10px;"><br>
 
-			{% if tanecnik.Dny_do_nove_registrace_csar == "Registrace ČSAR vypršela." %}
-			<h4 class="noreg">{{tanecnik.Dny_do_nove_registrace_csar }} </h4>
-			{% else %}
-			<h4 class="reg">{{tanecnik.Dny_do_nove_registrace_csar }} </h4>
-			{% endif %}
+					
+				</div>
+				<div class="col-md-8">
+				<div class="card-body">
+					<h3 class="card-title"><b>{{tanecnik.jmeno}} {{tanecnik.prijmeni}}</b></h3><br>
+					
+					<p class="card-text"> datum narozeni: {{tanecnik.datum_narozeni }} </p>
+			        <p class="card-text">rodne cislo: {{tanecnik.rodne_cislo}} </p>
+			        <p class="card-text">email: {{tanecnik.email}} </p>
+			        <p class="card-text">telefon: {{tanecnik.telefon}} </p>
+			        <p class="card-text">zdravotni prohlidka do: {{tanecnik.zdravotni_prohlidka}}</p>
 
-			{% if tanecnik.Dny_do_nove_zav_registrace_csar == "Zavodní registrace ČSAR vypršela." %}
-			<h4 class="noreg">{{tanecnik.Dny_do_nove_zav_registrace_csar }} </h4>
-			{% else %}
-			<h4 class="reg">{{tanecnik.Dny_do_nove_zav_registrace_csar }} </h4>
-			{% endif %}
 
-			{% if tanecnik.Dny_do_nove_registrace_wrrc == "Registrace WRRC vypršela." %}
-			<h4 class="noreg">{{tanecnik.Dny_do_nove_registrace_wrrc }} </h4>
-			{% else %}
-			<h4 class="reg">{{tanecnik.Dny_do_nove_registrace_wrrc }} </h4>
-			{% endif %}
+					{% if tanecnik.Dny_do_nove_registrace_csar == "Registrace ČSAR vypršela." %}
+					<p class="noreg">{{tanecnik.Dny_do_nove_registrace_csar }} </p>
+					{% else %}
+					<p class="reg">{{tanecnik.Dny_do_nove_registrace_csar }} </p>
+					{% endif %}
 
-	
+					{% if tanecnik.Dny_do_nove_zav_registrace_csar == "Zavodní registrace ČSAR vypršela." %}
+					<p class="noreg">{{tanecnik.Dny_do_nove_zav_registrace_csar }} </p>
+					{% else %}
+					<p class="reg">{{tanecnik.Dny_do_nove_zav_registrace_csar }} </p>
+					{% endif %}
 
+					{% if tanecnik.Dny_do_nove_registrace_wrrc == "Registrace WRRC vypršela." %}
+					<p class="noreg">{{tanecnik.Dny_do_nove_registrace_wrrc }} </p>
+					{% else %}
+					<p class="reg">{{tanecnik.Dny_do_nove_registrace_wrrc }} </p>
+					{% endif %}
+				</div>
+				<div style="float:right;">
+					<button type="button" class="btn btn-outline-success" data-bs-toggle="tooltip" title="Timto tlačítkem můžete přejít k registraci." style="margin:15px;">&nbsp;&nbsp;&nbsp;&nbsp;Registr&nbsp;&nbsp;&nbsp;&nbsp;</button>
+				
+					<button type="button" class="btn btn-outline-warning" data-bs-toggle="tooltip" title="Timto tlačítkem můžete změnit informace závodníka." style="margin:15px;">&nbsp;&nbsp;&nbsp;&nbsp;Upravit&nbsp;&nbsp;&nbsp;&nbsp;</button>
+
+					<button type="button" class="btn btn-outline-danger" data-bs-toggle="tooltip" title="Timto tlačítkem nevratně smažete závodníka." style="margin:15px;">&nbsp;&nbsp;&nbsp;&nbsp;Smazat&nbsp;&nbsp;&nbsp;&nbsp;</button>
+				</div>
+				</div>
+
+			</div>
+		</div>
+    
+</div>
 {% endblock %}
 

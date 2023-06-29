@@ -23,3 +23,10 @@ def tanecnik(request, pk):
 	tanecnik = Tanecnik.objects.get(id=pk)
 	
 	return render(request, "web_app/tanecnik.html", {'tanecnik' : tanecnik,})
+
+
+def tanecnici_prehled(request):
+
+	tanecnici_prehled = Tanecnik.objects.all()
+
+	return render (request, "web_app/tanecnici_prehled.html", {'tanecnici_prehled': tanecnici_prehled, })
