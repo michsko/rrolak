@@ -17,11 +17,11 @@
 				<div class="card-body">
 					<h3 class="card-title"><b>{{tanecnik.jmeno}} {{tanecnik.prijmeni}}</b></h3><br>
 					
-					<p class="card-text"> datum narozeni: {{tanecnik.datum_narozeni }} </p>
+					<p class="card-text"> datum narozeni: {{tanecnik.datum_narozeni|date:"Y-m-d"}} </p>
 			        <p class="card-text">rodne cislo: {{tanecnik.rodne_cislo}} </p>
 			        <p class="card-text">email: {{tanecnik.email}} </p>
 			        <p class="card-text">telefon: {{tanecnik.telefon}} </p>
-			        <p class="card-text">zdravotni prohlidka do: {{tanecnik.zdravotni_prohlidka}}</p>
+			        <p class="card-text">zdravotni prohlidka do: {{tanecnik.zdravotni_prohlidka|date:"Y-m-d"}}</p>
 
 
 					{% if tanecnik.Dny_do_nove_registrace_csar == "Registrace ČSAR vypršela." %}

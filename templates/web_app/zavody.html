@@ -1,0 +1,133 @@
+{% extends 'web_app/base.html' %}
+{% load static %}
+{% block content %}
+
+
+
+{% for zavod in zavody %}
+<br>
+<div class="container mb shadow" style="min-width: 90vw;">
+
+	<h3>{{ zavod.jmeno_souteze }}</h3>
+	<h4>Datum soutěže: {{ zavod.datum_souteze|date:"Y-m-d" }}</h4>
+	<h4>Konec_přihlášek: {{ zavod.prihlasky_do|date:"Y-m-d" }}</h4>
+	
+
+
+            
+  <table class="table table-striped">
+    <thead>
+      <tr>
+		<th>Děti </th>
+		<th>Žáci </th>
+		<th>Junior </th>
+		<th>C </th>
+		<th>B </th>
+		<th>A</th>
+		<th>MDFD </th>
+		<th>MDFJ </th>
+		<th>MDFS </th>
+		<th>DFD </th>
+		<th>DFJ </th>
+		<th>DFS </th>
+		<th>FJ </th>
+		<th>FS </th>
+		<th>DG </th>
+		<th>DL </th>
+	  </tr>
+    </thead>
+    <tbody>  
+      <tr>
+
+{% if zavod.kategorie_deti == True %}
+<td><p class="reg"> ✓ </p></td>
+{% else %}
+<td><p class="noreg"> x </p></td>
+{% endif %}
+
+{% if zavod.kategorie_zaci == True %}
+<td><p class="reg"> ✓ </p></td>
+{% else %}
+<td><p class="noreg"> x </p></td>
+{% endif %}
+
+{% if zavod.kategorie_junior == True %}
+<td><p class="reg"> ✓ </p></td>
+{% else %}
+<td><p class="noreg"> x </p></td>
+{% endif %}
+
+{% if zavod.kategorie_c == True %}
+<td><p class="reg"> ✓ </p></td>
+{% else %}
+<td><p class="noreg"> x </p></td>
+{% endif %}
+{% if zavod.kategorie_b == True %}
+<td><p class="reg"> ✓ </p></td>
+{% else %}
+<td><p class="noreg"> x </p></td>
+{% endif %}
+{% if zavod.kategorie_a == True %}
+<td><p class="reg"> ✓ </p></td>
+{% else %}
+<td><p class="noreg"> x </p></td>
+{% endif %}
+{% if zavod.kategorie_mdfd == True %}
+<td><p class="reg"> ✓ </p></td>
+{% else %}
+<td><p class="noreg"> x </p></td>
+{% endif %}
+{% if zavod.kategorie_mdfj == True %}
+<td><p class="reg"> ✓ </p></td>
+{% else %}
+<td><p class="noreg"> x </p></td>
+{% endif %}
+{% if zavod.kategorie_mdfs == True %}
+<td><p class="reg"> ✓ </p></td>
+{% else %}
+<td><p class="noreg"> x </p></td>
+{% endif %}
+{% if zavod.kategorie_dfd == True %}
+<td><p class="reg"> ✓ </p></td>
+{% else %}
+<td><p class="noreg"> x </p></td>
+{% endif %}
+{% if zavod.kategorie_djf == True %}
+<td><p class="reg"> ✓ </p></td>
+{% else %}
+<td><p class="noreg"> x </p></td>
+{% endif %}
+{% if zavod.kategorie_dfs == True %}
+<td><p class="reg"> ✓ </p></td>
+{% else %}
+<td><p class="noreg"> x </p></td>
+{% endif %}
+{% if zavod.kategorie_fj == True %}
+<td><p class="reg"> ✓ </p></td>
+{% else %}
+<td><p class="noreg"> x </p></td>
+{% endif %}
+{% if zavod.kategorie_fs == True %}
+<td><p class="reg"> ✓ </p></td>
+{% else %}
+<td><p class="noreg"> x </p></td>
+{% endif %}
+{% if zavod.kategorie_dg == True %}
+<td><p class="reg"> ✓ </p></td>
+{% else %}
+<td><p class="noreg"> x </p></td>
+{% endif %}
+{% if zavod.kategorie_dl == True %}
+<td><p class="reg"> ✓ </p></td>
+{% else %}
+<td><p class="noreg"> x </p></td>
+{% endif %}
+</tr>
+         
+    </tbody>
+
+</table>
+<br>
+</div>
+{% endfor %}
+{% endblock %}
