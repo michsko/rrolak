@@ -49,11 +49,14 @@ def zavody_prehled(request):
 
 
 
-def prihlasky_prehled(request):
+def prihlasky_prehled(request, pk):
 
-	prihlasky = Prihlaska_zavod.objects.all()
+	zavod = Zavod.objects.get(id=pk)
 
-	return render(request, "web_app/", {'prihlasky': prihlasky})
+	prihlasky = Prihlaska_zavod.objects.filter(zavod_id = pk)
+	
+
+	return render(request, "web_app/prihlasky_prehled.html", {'prihlasky': prihlasky, 'zavod': zavod})
 
 
 

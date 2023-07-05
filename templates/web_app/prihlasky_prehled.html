@@ -4,11 +4,10 @@
 
 
 
-{% for zavod in zavody %}
 <br>
 <div class="container mb shadow" style="min-width: 90vw;">
 
-	<h3>{{ zavod.jmeno_souteze }}</h3>
+	<h1>{{ zavod.jmeno_souteze }}</h3>
 	<h4>Datum soutěže: {{ zavod.datum_souteze|date:"Y-m-d" }}</h4>
 	<h4>Konec přihlášek: {{ zavod.prihlasky_do|date:"Y-m-d" }}</h4>
 	
@@ -34,12 +33,15 @@
 		<th>FS </th>
 		<th>DG </th>
 		<th>DL </th>
-		<th>Závod</th>
+		
 		<th>Přihlásit </th>
 	  </tr>
     </thead>
     <tbody>  
       <tr>
+      	
+
+
 
 		{% if zavod.kategorie_deti == True %}
 		<td><p class="reg"> ✓ </p></td>
@@ -123,14 +125,42 @@
 		{% else %}
 		<td><p class="noreg"> x </p></td>
 		{% endif %}
-		<td><a type="button" class="btn btn-secondary" href="{% url 'prihlasky_prehled' zavod.id %}">INFO</a></td>
+
 		<td><a type="button" class="btn btn-secondary">PŘIHLÁSIT</a></td>
 	</tr>
-         
     </tbody>
-
 </table>
 <br>
-</div>
-{% endfor %}
+<h3>Příhlášení soutěžící</h3>
+<br>
+ <table class="table table-striped">
+    <thead>
+      <tr>
+		<th>Jméno taneční jednotky</th>
+		<th>Klub</th>
+		<th>Kategorie </th>
+		<th>Platba </th>
+		<th>Hudba </th>
+		<th>Status</th>
+		
+	  </tr>
+    </thead>
+    <tbody>  
+    {% for prihlaska in prihlasky %}
+      <tr>
+	<td><p>{{ prihlaska.tanecni_jednotka_jmeno }}</p></td>
+	<td><p>{{ prihlaska.klub }}</p></td>}
+	<td><p>{{ prihlaska.kategorie }}</p></td>
+	<td><p>{{ prihlaska.platba }}</p></td>
+	<td><p>{{ prihlaska.hudba }}</p></td>
+	{% if prihlaska.tanecni_jednotka != null or prihlask.klub != null or prihlaska.platba == True or prihlaska.kategorie != null %}
+	<td><p class="reg">status</p></td>
+	{% else %}
+	<td><p class="noreg">status</p></td>
+	{% endif %}	
+	</tr>
+	{% endfor %}
+	</tbody>
+	</div>
+
 {% endblock %}

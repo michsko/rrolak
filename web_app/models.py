@@ -140,7 +140,8 @@ class Zavod(models.Model):
 
 
 class Prihlaska_zavod(models.Model):
-	soutez = models.ForeignKey(Zavod, on_delete=models.SET_NULL, null=True)
+	zavod = models.ForeignKey(Zavod, on_delete=models.SET_NULL, null=True, related_name='prihlaseni')
+	klub = models.ForeignKey(Klub, on_delete=models.SET_NULL, null=True, related_name='clen_klubu')
 	kategorie = models.CharField("Kategorie", max_length=255, blank=False)
 	tanecni_jednotka_jmeno = models.CharField('Jméno taneční jednotky', max_length=255, blank=True, null=True)
 	tanecni_jednotka = models.ForeignKey(Tanecni_jednotka, on_delete=models.SET_NULL, null=True, blank=False)
