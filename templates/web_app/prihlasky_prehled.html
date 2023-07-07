@@ -39,10 +39,6 @@
     </thead>
     <tbody>  
       <tr>
-      	
-
-
-
 		{% if zavod.kategorie_deti == True %}
 		<td><p class="reg"> ✓ </p></td>
 		{% else %}
@@ -126,22 +122,23 @@
 		<td><p class="noreg"> x </p></td>
 		{% endif %}
 
-		<td><a type="button" class="btn btn-secondary">PŘIHLÁSIT</a></td>
+		<td><a type="button" class="btn btn-secondary" data-bs-toggle="tooltip" title="Timto tlačítkem se přihlásíte k závodu.">PŘIHLÁSIT</a></td>
 	</tr>
     </tbody>
 </table>
 <br>
 <h3>Příhlášení soutěžící</h3>
-<br>
  <table class="table table-striped">
     <thead>
       <tr>
-		<th>Jméno taneční jednotky</th>
-		<th>Klub</th>
+		<th>Jméno taneční jednotky </th>
+		<th>Klub </th>
 		<th>Kategorie </th>
 		<th>Platba </th>
 		<th>Hudba </th>
 		<th>Status</th>
+		<th>Upravit přihlášku </th>
+		<th>Smazat přihlášku</th>
 		
 	  </tr>
     </thead>
@@ -151,16 +148,21 @@
 	<td><p>{{ prihlaska.tanecni_jednotka_jmeno }}</p></td>
 	<td><p>{{ prihlaska.klub }}</p></td>}
 	<td><p>{{ prihlaska.kategorie }}</p></td>
-	<td><p>{{ prihlaska.platba }}</p></td>
-	<td><p>{{ prihlaska.hudba }}</p></td>
-	{% if prihlaska.tanecni_jednotka != null or prihlask.klub != null or prihlaska.platba == True or prihlaska.kategorie != null %}
-	<td><p class="reg">status</p></td>
+	{% if prihlaska.platba == True %}
+	<td><p class="reg">zaplaceno</p></td>
 	{% else %}
-	<td><p class="noreg">status</p></td>
-	{% endif %}	
-	</tr>
+	<td><p class="noreg">neplaceno</p></td>
+	{% endif %}
+	<td><p>{{ prihlaska.hudba }}</p></td>
+	<td><p> status </p></td>
+	<td><a type="button" class="btn btn-secondary" data-bs-toggle="tooltip" title="Timto tlačítkem upravíte přihlášku.">Upravit</a></td>
+	<td><a type="button" class="btn btn-secondary"data-bs-toggle="tooltip" title="Timto tlačítkem nevratně smažete přihlášku.">Smazat</a></td>
+
 	{% endfor %}
+	</tr>
 	</tbody>
-	</div>
+
+</table>
+</div>
 
 {% endblock %}

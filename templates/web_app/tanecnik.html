@@ -43,11 +43,11 @@
 					{% endif %}
 				</div>
 				<div style="float:right;">
-					<button type="button" class="btn btn-outline-success" data-bs-toggle="tooltip" title="Timto tlačítkem můžete přejít k registraci." style="margin:15px;">&nbsp;&nbsp;&nbsp;&nbsp;Registr&nbsp;&nbsp;&nbsp;&nbsp;</button>
+					<button type="button" class="btn btn-outline-success" data-bs-toggle="tooltip" title="Timto tlačítkem můžete přejít k registraci." href='' style="margin:15px;">&nbsp;&nbsp;&nbsp;&nbsp;Registr&nbsp;&nbsp;&nbsp;&nbsp;</button>
 				
-					<button type="button" class="btn btn-outline-warning" data-bs-toggle="tooltip" title="Timto tlačítkem můžete změnit informace závodníka." style="margin:15px;">&nbsp;&nbsp;&nbsp;&nbsp;Upravit&nbsp;&nbsp;&nbsp;&nbsp;</button>
+					<a type="button" class="btn btn-outline-warning" data-bs-toggle="tooltip" title="Timto tlačítkem můžete změnit informace závodníka." href='{% url "upravit_tanecnika" tanecnik.id %}' style="margin:15px;">&nbsp;&nbsp;&nbsp;&nbsp;Upravit&nbsp;&nbsp;&nbsp;&nbsp;</a>
 
-					<button type="button" class="btn btn-outline-danger" data-bs-toggle="tooltip" title="Timto tlačítkem nevratně smažete závodníka." style="margin:15px;">&nbsp;&nbsp;&nbsp;&nbsp;Smazat&nbsp;&nbsp;&nbsp;&nbsp;</button>
+					<a type="button" class="btn btn-outline-danger" data-bs-toggle="tooltip" title="Timto tlačítkem nevratně smažete závodníka." href='{% url "smazat_tanecnika" tanecnik.id %}' style="margin:15px;">&nbsp;&nbsp;&nbsp;&nbsp;Smazat&nbsp;&nbsp;&nbsp;&nbsp;</a>
 				</div>
 				</div>
 

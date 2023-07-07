@@ -42,9 +42,11 @@
         <td>{{tanecnik.email}} </td>
         <td>{{tanecnik.telefon}}</td>
         <td>{{tanecnik.zdravotni_prohlidka}}</td>
-        <td><button type="button" class="btn btn-secondary">ZP-stáhnout</button></td>
-        <td><button type="button" class="btn btn-secondary">PAS-stáhnout</button></td>
-        <td><button type="button" class="btn btn-secondary">DOPING-stáhnout</button></td>
+        <td><a href="{{tanecnik.zdravotni_prohlidka_potvr" type="button" class="btn btn-secondary">ZP-stáhnout</a></td>
+
+        <td><a href="#" type="button" class="btn btn-secondary" download>PAS-stáhnout</a></td>
+        
+        <td><a href="{{tanecnik.doping.url" type="button" class="btn btn-secondary" download>DOPING-stáhnout</a></td>
         {% if tanecnik.Dny_do_nove_registrace_csar == "Registrace ČSAR vypršela." %}
         <td><p class="card-text noreg"><b>N</b></p></td>
         {% else %}
