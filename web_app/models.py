@@ -26,7 +26,7 @@ class Profil(models.Model):
 
 class Tanecnik(models.Model):
 	klub = models.ForeignKey(Klub, on_delete=models.SET_NULL, null=True)
-	foto_tanecnik = models.ImageField('Fotografie', upload_to='foto_tanecnik', default='foto_tanecnik/pic.jpg')
+	foto_tanecnik = models.ImageField('Fotografie', upload_to='foto_tanecnik/profil_foto/', default='foto_tanecnik/pic.jpg')
 	jmeno = models.CharField('Jméno', max_length=255, blank=False)
 	prijmeni = models.CharField('Příjmení',max_length=255, blank=False)
 	datum_narozeni = models.DateField('Datum narození', blank=False)
@@ -42,17 +42,17 @@ class Tanecnik(models.Model):
 
 
 	registr_csar = models.BooleanField('Registrace csar', default=False, null=True)
-	datum_registrace = models.DateField(date.today(), null=True, blank=True)
-	registrace_do = models.DateField(date.today().day+364, null=True, blank=True)
+	datum_registrace = models.DateField(auto_now_add=True, null=True, blank=True)
+	registrace_do = models.DateField(auto_now_add=False, null=True, blank=True)
 	
 	
 	registr_zavodni_csar = models.BooleanField('Zavodni registrace', default=False, null=True)
-	datum_zavodni_registrace_csar = models.DateField(date.today(), null=True, blank=True)
-	zavodni_registrace_do = models.DateField(date.today().day+364, null=True, blank=True)
+	datum_zavodni_registrace_csar = models.DateField(auto_now_add=True, null=True, blank=True)
+	zavodni_registrace_do = models.DateField(auto_now_add=False, null=True, blank=True)
 	
 
 	registr_wrrc = models.BooleanField('Registrace wrrc', default=False, null=True)
-	datum_registrace_wrrc = models.DateField(date.today(), null=True, blank = True)
+	datum_registrace_wrrc = models.DateField(auto_now_add=True, null=True, blank = True)
 	registrace_wrrc_do = models.DateField(date.today().day+364, null=True, blank=True)
 	
 	

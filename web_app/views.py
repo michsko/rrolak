@@ -47,10 +47,11 @@ def pridat_tanecnika(request):
 	submitted = False
 
 	if request.method == "POST":
-		form = TanecnikForm(request.POST)
+		form = TanecnikForm(request.POST, request.FILES)
 		if form.is_valid():
 			form.save()
-			return HttpResponseRedirect("pridat_tanecnika?submitted=True")
+			messages.success(request,("Tanečník byl úspěšně přidán."))
+			return redirect("tanecnici_prehled")
 	else: 
 		form = TanecnikForm
 		if 'submitted' in request.GET:
@@ -71,7 +72,7 @@ def upravit_tanecnika(request, pk):
 
 	tanecnik = Tanecnik.objects.get(id=pk)
 
-	form = TanecnikForm(request.POST or None, instance=tanecnik)
+	form = TanecnikForm(request.POST or request.FILES or None, instance=tanecnik)
 	if form.is_valid():
 		form.save()
 		messages.success(request, ('Informace o tanečníkovi byly změněny.'))

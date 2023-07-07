@@ -32,7 +32,6 @@ class TanecnikForm(ModelForm):
 		}
 
 		widgets = {'klub': forms.Select(attrs={'class': 'form-control'}), 
-		'foto_tanecnik': forms.FileInput(attrs={'class': 'form-control'}),
 		'jmeno': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Jméno:',}), 
 		'prijmeni': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Příjmení:',}), 
 		'datum_narozeni': forms.DateInput(attrs={'class': 'form-control', 'placeholder': 'Datum narození: (RRRR-MM-DD)',}), 
@@ -41,9 +40,6 @@ class TanecnikForm(ModelForm):
 		'adresa': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Adresa:',}), 
 		'telefon': forms.TextInput(attrs={'class': 'form-control', 'placeholder':'Telefonní číslo:'}), 
 		'zdravotni_prohlidka': forms.DateInput(attrs={'class': 'form-control', 'placeholder': 'Zdravotní prohlídka DO: (RRRR-MM-DD)',}), 
-		'zdravotni_prohlidka_potvr': forms.FileInput(attrs={'class': 'form-control'}), 
-		'pas': forms.FileInput(attrs={'class': 'form-control', }), 
-		'doping': forms.FileInput(attrs={'class': 'form-control'}), 
 		'registr_csar': forms.CheckboxInput(attrs={'class': 'form-check form-check-inline'}), 
 		'registr_zavodni_csar': forms.CheckboxInput(attrs={'class': 'form-check form-check-inline'}),
 		'registr_wrrc': forms.CheckboxInput(attrs={'class': 'form-check form-check-inline'}),
