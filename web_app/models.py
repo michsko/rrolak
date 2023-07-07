@@ -35,7 +35,7 @@ class Tanecnik(models.Model):
 	adresa = models.TextField('Adresa', blank=True, null=True)
 	telefon = models.CharField('Telefonní číslo', max_length=255, blank=False)
 	zdravotni_prohlidka = models.DateField('Zdravotní prohlídka DO ', blank=False)
-	zdravotni_prohlidka_potvr = models.FileField('Zdravotní prohlídka', upload_to='zdravotni_prohlidka', blank=True)
+	zdravotni_prohlidka_potvr = models.FileField('Zdravotní prohlídka', upload_to='zdravotni_prohlidka', blank=False)
 	pas = models.FileField('Kopie pasu', upload_to='kopie_pasu', blank=True)
 	doping = models.FileField('Dopingove prohlašení', upload_to='dopingove_prohlaseni', blank=True)
 	

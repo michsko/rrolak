@@ -22,6 +22,7 @@
         <th>Email</th>
         <th>Telefon</th>
         <th>Zdravotní-p.</th>
+        <th>zP<th>
         <th>ZP</th>
         <th>Kopie pasu</th>
         <th>Doping</th>
@@ -46,11 +47,15 @@
         <td>{{tanecnik.email}} </td>
         <td>{{tanecnik.telefon}}</td>
         <td>{{tanecnik.zdravotni_prohlidka}}</td>
-        <td><a href="{{tanecnik.zdravotni_prohlidka_potvr" type="button" class="btn btn-secondary">ZP-stáhnout</a></td>
 
-        <td><a href="#" type="button" class="btn btn-secondary" download>PAS-stáhnout</a></td>
+        {% if file.url %}
+        <td><a href="{{tanecnik.zdravotni_prohlidka_potvr.url}}" type="button" class="btn btn-secondary"download>ZP-stáhnout</a></td>
+
+        <td><a href="{{tanecnik.pas.url}}" type="button" class="btn btn-secondary" download>PAS-stáhnout</a></td>
         
-        <td><a href="{{tanecnik.doping.url" type="button" class="btn btn-secondary" download>DOPING-stáhnout</a></td>
+        <td><a href="{{tanecnik.doping.url}}" type="button" class="btn btn-secondary" download>DOPING-stáhnout</a></td>
+
+
         {% if tanecnik.Dny_do_nove_registrace_csar == "Registrace ČSAR vypršela." %}
         <td><p class="card-text noreg"><b>N</b></p></td>
         {% else %}
