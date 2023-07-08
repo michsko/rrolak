@@ -21,9 +21,8 @@
         <th>Rodné č.</th>
         <th>Email</th>
         <th>Telefon</th>
-        <th>Zdravotní-p.</th>
-        <th>zP<th>
-        <th>ZP</th>
+        <th>Zdravotní-prohlídka</th>
+        <th>Prohlidka potvrzení</th>
         <th>Kopie pasu</th>
         <th>Doping</th>
         <th>CSAR</th>
@@ -48,12 +47,25 @@
         <td>{{tanecnik.telefon}}</td>
         <td>{{tanecnik.zdravotni_prohlidka}}</td>
 
-        {% if file.url %}
-        <td><a href="{{tanecnik.zdravotni_prohlidka_potvr.url}}" type="button" class="btn btn-secondary"download>ZP-stáhnout</a></td>
+        {% if tanecnik.zdravotni_prohlidka_potvr %}
+        <td><a href="{{tanecnik.zdravotni_prohlidka_potvr.url}}" class="btn btn-secondary" download>ZDP</a></td>
+        {% else %}
+        <td><h4 class="noreg"><b>x</b></h4></td>
+        {% endif %}
 
-        <td><a href="{{tanecnik.pas.url}}" type="button" class="btn btn-secondary" download>PAS-stáhnout</a></td>
-        
-        <td><a href="{{tanecnik.doping.url}}" type="button" class="btn btn-secondary" download>DOPING-stáhnout</a></td>
+        {% if tanecnik.pas %}
+        <td><a href="{{tanecnik.pas.url}}" type="button" class="btn btn-secondary" download>PAS</a></td>
+         {% else %}
+        <td><h4 class="noreg"><b>x</b></h4></td>
+        {% endif %}
+
+
+        {% if tanecnik.doping %}
+        <td><a href="{{tanecnik.doping.url}}" type="button" class="btn btn-secondary" download>DOP</a></td>
+         {% else %}
+        <td><h4 class="noreg"><b>x</b></h4></td>
+        {% endif %}
+
 
 
         {% if tanecnik.Dny_do_nove_registrace_csar == "Registrace ČSAR vypršela." %}
