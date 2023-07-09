@@ -50,20 +50,20 @@
         {% if tanecnik.zdravotni_prohlidka_potvr %}
         <td><a href="{{tanecnik.zdravotni_prohlidka_potvr.url}}" class="btn btn-secondary" download>ZDP</a></td>
         {% else %}
-        <td><h4 class="noreg"><b>x</b></h4></td>
+        <td><h6 class="noreg"><b>x</b></h6></td>
         {% endif %}
 
         {% if tanecnik.pas %}
         <td><a href="{{tanecnik.pas.url}}" type="button" class="btn btn-secondary" download>PAS</a></td>
          {% else %}
-        <td><h4 class="noreg"><b>x</b></h4></td>
+        <td><h6 class="noreg"><b>x</b></h6></td>
         {% endif %}
 
 
         {% if tanecnik.doping %}
         <td><a href="{{tanecnik.doping.url}}" type="button" class="btn btn-secondary" download>DOP</a></td>
          {% else %}
-        <td><h4 class="noreg"><b>x</b></h4></td>
+        <td><h6 class="noreg"><b>x</b></h6></td>
         {% endif %}
 
 

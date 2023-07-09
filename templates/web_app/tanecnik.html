@@ -33,7 +33,7 @@
 					{% if tanecnik.Dny_do_nove_zav_registrace_csar == "Zavodní registrace ČSAR vypršela." %}
 					<p class="noreg">{{tanecnik.Dny_do_nove_zav_registrace_csar }} </p>
 					{% else %}
-					<p class="reg">registrace vyprší za:{{tanecnik.Dny_do_nove_zav_registrace_csar }} </p>
+					<p class="reg">{{tanecnik.Dny_do_nove_zav_registrace_csar }} </p>
 					{% endif %}
 
 					{% if tanecnik.Dny_do_nove_registrace_wrrc == "Registrace WRRC vypršela." %}

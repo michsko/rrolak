@@ -70,33 +70,60 @@ class Tanecnik(models.Model):
 	@property
 	def Dny_do_nove_registrace_csar(self):
 		today = datetime.now().date()
-		dnes = time.strptime(today, "%d%m%Y")
-		registrace_do = time.strptime(self.registrace_do, "%d%m%Y")
-		if registrace_do - dnes == 0:
+		dnes = today.strftime('%Y-%m-%d')
+		registrace = self.registrace_do.strftime('%Y-%m-%d')
+
+		if registrace < dnes:
 			stripped_dny = "Registrace ČSAR vypršela."
+			return stripped_dny
+
 		else:
-			dny_do_nove_registrace = registrace_do - dnes
-			stripped_dny = dny_do_nove_registrace.split(" ",1)[0] + "d."
+			return self.registrace_do
+
 
 	@property
 	def Dny_do_nove_zav_registrace_csar(self):
-		dnes = date.today()
+		today = datetime.now().date()
+		dnes = today.strftime('%Y-%m-%d')
+		registrace = self.zavodni_registrace_do.strftime('%Y-%m-%d')
+
+		if registrace < dnes:
+			stripped_dny = "Zavodní registrace ČSAR vypršela."
+			return stripped_dny
+
+		else:
+			return self.zavodni_registrace_do
+	"""	dnes = date.today()
 		if self.zavodni_registrace_do <= dnes:
 			stripped_dny = "Zavodní registrace ČSAR vypršela."
 		else:
 			dny_do_nove_zav_registrace = self.zavodni_registrace_do - dnes
 			stripped_dny = str(dny_do_nove_zav_registrace).split(" ",1)[0] + " d."
 		return stripped_dny
+"""
 
 	@property
 	def Dny_do_nove_registrace_wrrc(self):
-		dnes = date.today()
+		today = datetime.now().date()
+		dnes = today.strftime('%Y-%m-%d')
+		registrace = self.registrace_wrrc_do.strftime('%Y-%m-%d')
+
+		if registrace < dnes:
+			stripped_dny = "Registrace WRRC vypršela."
+			return stripped_dny
+
+		else:
+			return self.registrace_wrrc_do
+	"""	dnes = date.today()
 		if self.registrace_wrrc_do <= dnes:
 			stripped_dny = "Registrace WRRC vypršela."
 		else:
 			dny_do_nove_wrrc_registrace = self.registrace_wrrc_do - dnes
 			stripped_dny = str(dny_do_nove_wrrc_registrace).split(" ",1)[0] + " d."
 		return stripped_dny
+	"""
+		
+
 
 class Tanecni_jednotka(models.Model):
 	klub = models.ForeignKey(Klub, on_delete=models.SET_NULL, null=True)
