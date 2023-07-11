@@ -7,7 +7,8 @@ from .models import Zavod
 from .models import Prihlaska_zavod
 from .models import Tanecni_jednotka
 from .models import Profil
-from .forms import TanecnikForm 
+from .forms import TanecnikForm
+from .forms import TanecniJednotkaForm 
 
 # Create your views here.
 
@@ -82,7 +83,56 @@ def upravit_tanecnika(request, pk):
 		return render(request, "web_app/upravit_tanecnika.html", {'tanecnik': tanecnik, 'form': form,})
 
 
-# stahnout doprovodne materialy zavodnika
+# tanecni jednotka 
+
+
+
+def pridat_tj(request):
+	submitted = False
+	if request.method == "POST":
+		form = TanecniJednotkaForm(request.POST)
+		if form.is_valid():
+			form.save()
+			messages.success(request, ("Taneční jednotka byla úspěšně přidána."))
+			return redirect('tanecni_jednotky_prehled')
+
+	else:
+		form = TanecniJednotkaForm
+		if 'submitted' in request.GET:
+			submitted = True
+
+	return render(request, "web_app/pridat_tj.html", {'form': form, 'submitted': submitted})
+
+
+def smazat_tj(request, pk):
+
+	tanecni_jednotka = Tanecni_jednotka.objects.get(id=pk)
+	tanecni_jednotka.delete()
+	messages.success(request, ("Taneční jednotka byla úspěšně smazána."))
+	
+	return redirect('Tanecni_jednotky_prehled')
+
+
+def tanecni_jednotky_prehled(request):
+	
+	tanecni_jednotky = Tanecni_jednotka.objects.all()
+
+	return render(request, "web_app/tanecni_jednotky_prehled.html", {'tanecni_jednotky': tanecni_jednotky})
+
+
+
+def upravit_tj(request, pk):
+
+	tanecni_jednotka = Tanecni_jednotka.objects.get(id=pk)
+
+	form = TanecniJednotkaForm(request.POST or None, instance=tanecni_jednotka)
+	if form.is_valid():
+		form.save()
+		messages.success(request, ('Informace o Taneční jednotce byly změněny'))
+		return redirect('tanecni_jednotky_prehled')
+	else:
+		return render(request, "web_app/upravit_tj.html", {'tanecni_jednotka': tanecni_jednotka, 'form': form})
+
 
 
 
@@ -109,11 +159,5 @@ def prihlasky_prehled(request, pk):
 	return render(request, "web_app/prihlasky_prehled.html", {'prihlasky': prihlasky, 'zavod': zavod})
 
 
-
-def tanecni_jednotky_prehled(request):
-
-	tanecni_jednotky = Tanecni_jednotka.objects.all()
-
-	return render(request, "web_app/", {'tanecni_jednotky': tanecni_jednotky})
 
 

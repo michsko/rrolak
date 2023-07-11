@@ -12,5 +12,8 @@ urlpatterns = [
    	path('pridat_tanecnika', views.pridat_tanecnika, name='pridat_tanecnika'),
    	path('upravit_tanecnika/<int:pk>', views.upravit_tanecnika, name='upravit_tanecnika'),
    	path('smazat_tanecnika/<int:pk>', views.smazat_tanecnika, name='smazat_tanecnika'),
-
+   	path('tanecni_jednotky_prehled', views.tanecni_jednotky_prehled, name='tanecni_jednotky_prehled'),
+   	path('pridat_tj', views.pridat_tj, name='pridat_tj'),
+   	path('upravit_tj/<int:pk>', views.upravit_tj, name='upravit_tj'),
+   	path('smazat_tj/<int:pk>', views.smazat_tj, name='smazat_tj'),
 ]

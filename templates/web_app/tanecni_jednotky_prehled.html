@@ -1,0 +1,59 @@
+{% extends 'web_app/base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container" style=" min-height: 100vh;">
+	<br/><br/><br/>
+	<h2>Taneční jednotky - přehled</h2>	 
+	<br>
+  	<p>Toto je přehled tanečních jednotek.</p>
+
+     
+
+	<div style="display: flex; flex-direction: row; flex-wrap: wrap">
+		
+		{% for tanecni_jednotka in tanecni_jednotky %}
+		
+		
+		<div class="card shadow" style="width: 18rem; margin: 10px">
+		  <div class="card-body">
+		  	<h5 class="card-card-text"><b>{{tanecni_jednotka.klub}}</b></h5> 
+		    <h6 class="card-card-text">Jmeno TJ: {{tanecni_jednotka.jmeno_tanecni_jednotky}}</h6>
+		     <h6 class="card-card-text">Kategorie: {{tanecni_jednotka.kategorie}}</h6>
+		    <p class="card-text">{{tanecni_jednotka.tanecnik1}}</p>
+		    <p class="card-text">{{tanecni_jednotka.tanecnik2}}</p>
+		    <p class="card-text">{{tanecni_jednotka.tanecnik3}}</p>
+		    <p class="card-text">{{tanecni_jednotka.tanecnik4}}</p>
+		    <p class="card-text">{{tanecni_jednotka.tanecnik5}}</p>
+		    <p class="card-text">{{tanecni_jednotka.tanecnik6}}</p>
+		    <p class="card-text">{{tanecni_jednotka.tanecnik7}}</p>
+		    <p class="card-text">{{tanecni_jednotka.tanecnik8}}</p>
+		    <p class="card-text">{{tanecni_jednotka.tanecnik9}}</p>
+		    <p class="card-text">{{tanecni_jednotka.tanecnik10}}</p>
+		    <p class="card-text">{{tanecni_jednotka.tanecnik11}}</p>
+		    <p class="card-text">{{tanecni_jednotka.tanecnik12}}</p>
+		    <p class="card-text">{{tanecni_jednotka.tanecnik13}}</p>
+		    <p class="card-text">{{tanecni_jednotka.tanecnik14}}</p>
+		    <p class="card-text">{{tanecni_jednotka.tanecnik15}}</p>
+		    <p class="card-text">{{tanecni_jednotka.tanecnik16}}</p>
+
+		  	
+		    <a href="{% url 'upravit_tj' tanecni_jednotka.id %}" class="btn btn-primary" data-bs-toggle="tooltip" title="Timto tlačítkem můžete upravit informace o taneční jednotce." href='' style="margin:15px;">Upravit TJ</a>
+
+
+		    <a href="{% url 'smazat_tj' tanecni_jednotka.id %}" class="btn btn-primary"data-bs-toggle="tooltip" title="Timto tlačítkem nenávratně smažete taneční jednotku." href='' style="margin:15px;">Smazat TJ</a>
+		 
+		  </div>
+		</div>
+
+	    {% endfor %}
+	</div>
+</div>
+
+	
+		
+{% endblock %}
+
+
+
+	
