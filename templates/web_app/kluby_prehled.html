@@ -1,0 +1,24 @@
+	{% extends 'web_app/base.html' %}
+	{% load static %}
+	{% block content %}
+
+
+<div class="container">
+	<div class="row row-cols-1 row-cols-md-3 g-4">
+			{% for klub in kluby_prehled %}
+	  <div class="col">
+	    <div class="card h-100" style="background-color: gray; size: 18rem;  margin: 10px"">
+	      <img src="{{ klub.logo_klub.url }}" class="card-img-top" alt="logo klubu">
+	      <div class="card-body">
+	        <h3 class="card-title"><b>{{ klub.klub }}</b></h3>
+	        <a class="btn btn-primary" href="#" role="button">Přihlásit</a>
+
+	      </div>
+	    </div>
+	  </div>
+   {% endfor %}
+    </div>
+</div>
+
+
+	{% endblock %}

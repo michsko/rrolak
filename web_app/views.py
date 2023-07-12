@@ -18,10 +18,16 @@ def home(request):
 
 	return render(request, 'web_app/home.html', {})
 
+# kluby
+
+def kluby_prehled(request):
+	kluby_prehled = Profil.objects.all()
+
+	return render(request, "web_app/kluby_prehled.html", {'kluby_prehled': kluby_prehled,})
+
 
 
 #tanecnici 
-
 
 def tanecnici(request):
 
