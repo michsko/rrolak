@@ -22,9 +22,9 @@
 			<p class="card-text">zdravotni prohlidka do: {{tanecnik.zdravotni_prohlidka|date:"Y-m-d"}}</p>
 		
 				{% if tanecnik.Dny_do_nove_registrace_csar == "Registrace ČSAR vypršela." %}
-				<p class="card-text noreg">{{tanecnik.Dny_do_nove_registrace_csar }} </p>
+				<p class="noreg">{{tanecnik.Dny_do_nove_registrace_csar }} </p>
 				{% else %}
-				<p class="card-textv reg">{{tanecnik.Dny_do_nove_registrace_csar }} </p>
+				<p class="reg">{{tanecnik.Dny_do_nove_registrace_csar }}</p>
 				{% endif %}
 
 				{% if tanecnik.Dny_do_nove_zav_registrace_csar == "Zavodní registrace ČSAR vypršela." %}
@@ -38,7 +38,7 @@
 				{% else %}
 				<p class="card-text reg">{{tanecnik.Dny_do_nove_registrace_wrrc }} </p>
 				{% endif %}
-			    
+			  
 		    <a href="{% url 'tanecnik' tanecnik.id %}" class="btn btn-primary">Ukázat kartu</a>
 		  </div>
 		</div>
