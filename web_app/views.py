@@ -63,10 +63,12 @@ def klub(request):
 	user_object = User.objects.get(username=request.user.username)
 	klub_profile = Profil.objects.get(klub=user_object)
 	tanecnici = Tanecnik.objects.all().filter(klub=user_object)
+	tanecni_jednotky = Tanecni_jednotka.objects.all().filter(klub=user_object)
 
 	return render(request, "web_app/klub.html", 
 		{'klub_profile': klub_profile, 
-		'tanecnici': tanecnici, })
+		'tanecnici': tanecnici,
+		'tanecni_jednotky': tanecni_jednotky})
 
 
 

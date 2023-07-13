@@ -18,25 +18,88 @@
 		<div class="card shadow" style="width: 18rem; margin: 10px">
 		  <div class="card-body">
 		  	<h5 class="card-card-text"><b>{{tanecni_jednotka.klub}}</b></h5> 
-		    <h6 class="card-card-text">Jmeno TJ: {{tanecni_jednotka.jmeno_tanecni_jednotky}}</h6>
+		    <h6 class="card-card-text">Taneční Jednotka: <b> {{tanecni_jednotka.jmeno_tanecni_jednotky}}</b></h6>
 		     <h6 class="card-card-text">Kategorie: {{tanecni_jednotka.kategorie}}</h6>
-		    <p class="card-text">{{tanecni_jednotka.tanecnik1}}</p>
-		    <p class="card-text">{{tanecni_jednotka.tanecnik2}}</p>
-		    <p class="card-text">{{tanecni_jednotka.tanecnik3}}</p>
-		    <p class="card-text">{{tanecni_jednotka.tanecnik4}}</p>
-		    <p class="card-text">{{tanecni_jednotka.tanecnik5}}</p>
-		    <p class="card-text">{{tanecni_jednotka.tanecnik6}}</p>
-		    <p class="card-text">{{tanecni_jednotka.tanecnik7}}</p>
-		    <p class="card-text">{{tanecni_jednotka.tanecnik8}}</p>
-		    <p class="card-text">{{tanecni_jednotka.tanecnik9}}</p>
-		    <p class="card-text">{{tanecni_jednotka.tanecnik10}}</p>
-		    <p class="card-text">{{tanecni_jednotka.tanecnik11}}</p>
-		    <p class="card-text">{{tanecni_jednotka.tanecnik12}}</p>
-		    <p class="card-text">{{tanecni_jednotka.tanecnik13}}</p>
-		    <p class="card-text">{{tanecni_jednotka.tanecnik14}}</p>
-		    <p class="card-text">{{tanecni_jednotka.tanecnik15}}</p>
-		    <p class="card-text">{{tanecni_jednotka.tanecnik16}}</p>
-
+		     {% if tanecni_jednotka.jmeno_tanecnik1 == None%}
+		     <p></p>
+		     {% else %}
+		    <p class="card-text">{{tanecni_jednotka.jmeno_tanecnik1}}</p>
+		    {% endif %}
+		    {% if tanecni_jednotka.jmeno_tanecnik2 == None%}
+		     <p></p>
+		     {% else %}
+		    <p class="card-text">{{tanecni_jednotka.jmeno_tanecnik2}}</p>
+		    {% endif %}
+		    {% if tanecni_jednotka.jmeno_tanecnik3 == None%}
+		     <p></p>
+		     {% else %}
+		    <p class="card-text">{{tanecni_jednotka.jmeno_tanecnik3}}</p>
+		    {% endif %}
+		    {% if tanecni_jednotka.jmeno_tanecnik4 == None%}
+		     <p></p>
+		     {% else %}
+		    <p class="card-text">{{tanecni_jednotka.jmeno_tanecnik4}}</p>
+		    {% endif %}
+		    {% if tanecni_jednotka.jmeno_tanecnik5 == None%}
+		     <p></p>
+		     {% else %}
+		    <p class="card-text">{{tanecni_jednotka.jmeno_tanecnik5}}</p>
+		    {% endif %}
+		    {% if tanecni_jednotka.jmeno_tanecnik6 == None %}
+		     <p></p>
+		     {% else %}
+		    <p class="card-text">{{tanecni_jednotka.jmeno_tanecnik6}}</p>
+		    {% endif %}
+		    {% if tanecni_jednotka.jmeno_tanecnik7 == None%}
+		     <p></p>
+		     {% else %}
+		    <p class="card-text">{{tanecni_jednotka.jmeno_tanecnik7}}</p>
+		    {% endif %}
+		    {% if tanecni_jednotka.jmeno_tanecnik8 == None%}
+		     <p></p>
+		     {% else %}
+		    <p class="card-text">{{tanecni_jednotka.jmeno_tanecnik8}}</p>
+		    {% endif %}
+		    {% if tanecni_jednotka.jmeno_tanecnik9 == None%}
+		     <p></p>
+		     {% else %}
+		    <p class="card-text">{{tanecni_jednotka.jmeno_tanecnik9}}</p>
+		    {% endif %}
+		    {% if tanecni_jednotka.jmeno_tanecnik10 == None%}
+		     <p></p>
+		     {% else %}
+		    <p class="card-text">{{tanecni_jednotka.jmeno_tanecnik10}}</p>
+		    {% endif %}
+		    {% if tanecni_jednotka.jmeno_tanecnik11 == None%}
+		     <p></p>
+		     {% else %}
+		    <p class="card-text">{{tanecni_jednotka.jmeno_tanecnik11}}</p>
+		    {% endif %}
+		    {% if tanecni_jednotka.jmeno_tanecnik12 == None%}
+		     <p></p>
+		     {% else %}
+		    <p class="card-text">{{tanecni_jednotka.jmeno_tanecnik12}}</p>
+		    {% endif %}
+		    {% if tanecni_jednotka.jmeno_tanecnik13 == None%}
+		     <p></p>
+		     {% else %}
+		    <p class="card-text">{{tanecni_jednotka.jmeno_tanecnik13}}</p>
+		    {% endif %}
+		    {% if tanecni_jednotka.jmeno_tanecnik14 == None%}
+		     <p></p>
+		     {% else %}
+		    <p class="card-text">{{tanecni_jednotka.jmeno_tanecnik14}}</p>
+		    {% endif %}
+		    {% if tanecni_jednotka.jmeno_tanecnik15 == None%}
+		     <p></p>
+		     {% else %}
+		    <p class="card-text">{{tanecni_jednotka.jmeno_tanecnik15}}</p>
+		    {% endif %}
+		    {% if tanecni_jednotka.jmeno_tanecnik16 == None%}
+		     <p></p>
+		     {% else %}
+		    <p class="card-text">{{tanecni_jednotka.jmeno_tanecnik16}}</p>
+		    {% endif %}
 		  	
 		    <a href="{% url 'upravit_tj' tanecni_jednotka.id %}" class="btn btn-primary" data-bs-toggle="tooltip" title="Timto tlačítkem můžete upravit informace o taneční jednotce." href='' style="margin:15px;">Upravit TJ</a>
 
