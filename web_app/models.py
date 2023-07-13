@@ -2,9 +2,15 @@ from django.db import models
 from django.contrib.auth import get_user_model
 from datetime import date
 from datetime import datetime
+from datetime import timedelta
+import time
 
 
 Klub = get_user_model()
+
+
+def platnost():
+	return datetime.now().date()+ timedelta(days=365)
 
 
 # Create your models here.
@@ -26,33 +32,34 @@ class Profil(models.Model):
 
 class Tanecnik(models.Model):
 	klub = models.ForeignKey(Klub, on_delete=models.SET_NULL, null=True)
-	foto_tanecnik = models.ImageField('Fotografie', upload_to='foto_tanecnik', default='foto_tanecnik/pic.jpg')
+	foto_tanecnik = models.ImageField('Fotografie', upload_to='foto_tanecnik/profil_foto/', default='foto_tanecnik/pic.jpg')
 	jmeno = models.CharField('Jméno', max_length=255, blank=False)
 	prijmeni = models.CharField('Příjmení',max_length=255, blank=False)
 	datum_narozeni = models.DateField('Datum narození', blank=False)
 	rodne_cislo = models.IntegerField('Rodné číslo', blank=False)
 	email = models.EmailField('Email', blank=False)
+	adresa = models.TextField('Adresa', blank=True, null=True)
 	telefon = models.CharField('Telefonní číslo', max_length=255, blank=False)
-	zdravotni_prohlidka = models.DateField('Zdravotní prohlídka DO: ', blank=False)
-	zdravotni_prohlidka_potvr = models.FileField('Zdravotní prohlídka', upload_to='zdravotni_prohlidka', blank=True)
-	pas = models.FileField('Kopie pasu', upload_to='kopie_pasu', blank=True)
-	doping = models.FileField('Dopingove prohlašení', upload_to='dopingove_prohlaseni', blank=True)
+	zdravotni_prohlidka = models.DateField('Zdravotní prohlídka DO ', blank=False)
+	zdravotni_prohlidka_potvr = models.FileField('Zdravotní prohlídka', upload_to='zdravotni_prohlidka/', null=True, blank=True)
+	pas = models.FileField('Kopie pasu', upload_to='kopie_pasu/', null=True, blank=True)
+	doping = models.FileField('Dopingove prohlašení', upload_to='dopingove_prohlaseni/', null=True, blank=True)
 	
 
 
 	registr_csar = models.BooleanField('Registrace csar', default=False, null=True)
-	datum_registrace = models.DateField(date.today(), null=True, blank=True)
-	registrace_do = models.DateField(date.today().day+364, null=True, blank=True)
+	datum_registrace = models.DateField(auto_now_add=True, null=True, blank=True)
+	registrace_do = models.DateField(default=platnost, null=True, blank=True)
 	
 	
 	registr_zavodni_csar = models.BooleanField('Zavodni registrace', default=False, null=True)
-	datum_zavodni_registrace_csar = models.DateField(date.today(), null=True, blank=True)
-	zavodni_registrace_do = models.DateField(date.today().day+364, null=True, blank=True)
+	datum_zavodni_registrace_csar = models.DateField(auto_now_add=True, null=True, blank=True)
+	zavodni_registrace_do = models.DateField(default=platnost, null=True, blank=True)
 	
 
 	registr_wrrc = models.BooleanField('Registrace wrrc', default=False, null=True)
-	datum_registrace_wrrc = models.DateField(date.today(), null=True, blank = True)
-	registrace_wrrc_do = models.DateField(date.today().day+364, null=True, blank=True)
+	datum_registrace_wrrc = models.DateField(auto_now_add=True, null=True, blank = True)
+	registrace_wrrc_do = models.DateField(default=platnost, null=True, blank=True)
 	
 	
 
@@ -62,34 +69,61 @@ class Tanecnik(models.Model):
 
 	@property
 	def Dny_do_nove_registrace_csar(self):
-		dnes = date.today()
-		if self.registrace_do <= dnes:
+		today = datetime.now().date()
+		dnes = today.strftime('%Y-%m-%d')
+		registrace = self.registrace_do.strftime('%Y-%m-%d')
+
+		if registrace < dnes:
 			stripped_dny = "Registrace ČSAR vypršela."
+			return stripped_dny
+
 		else:
-			dny_do_nove_registrace = self.registrace_do - dnes
-			stripped_dny = str(dny_do_nove_registrace).split(" ",1)[0] + " d."
-		return stripped_dny
+			return self.registrace_do
 
 
 	@property
 	def Dny_do_nove_zav_registrace_csar(self):
-		dnes = date.today()
+		today = datetime.now().date()
+		dnes = today.strftime('%Y-%m-%d')
+		registrace = self.zavodni_registrace_do.strftime('%Y-%m-%d')
+
+		if registrace < dnes:
+			stripped_dny = "Zavodní registrace ČSAR vypršela."
+			return stripped_dny
+
+		else:
+			return self.zavodni_registrace_do
+	"""	dnes = date.today()
 		if self.zavodni_registrace_do <= dnes:
 			stripped_dny = "Zavodní registrace ČSAR vypršela."
 		else:
 			dny_do_nove_zav_registrace = self.zavodni_registrace_do - dnes
 			stripped_dny = str(dny_do_nove_zav_registrace).split(" ",1)[0] + " d."
 		return stripped_dny
+"""
 
 	@property
 	def Dny_do_nove_registrace_wrrc(self):
-		dnes = date.today()
+		today = datetime.now().date()
+		dnes = today.strftime('%Y-%m-%d')
+		registrace = self.registrace_wrrc_do.strftime('%Y-%m-%d')
+
+		if registrace < dnes:
+			stripped_dny = "Registrace WRRC vypršela."
+			return stripped_dny
+
+		else:
+			return self.registrace_wrrc_do
+	"""	dnes = date.today()
 		if self.registrace_wrrc_do <= dnes:
 			stripped_dny = "Registrace WRRC vypršela."
 		else:
 			dny_do_nove_wrrc_registrace = self.registrace_wrrc_do - dnes
 			stripped_dny = str(dny_do_nove_wrrc_registrace).split(" ",1)[0] + " d."
 		return stripped_dny
+	"""
+		
+
 
 class Tanecni_jednotka(models.Model):
 	klub = models.ForeignKey(Klub, on_delete=models.SET_NULL, null=True)
@@ -108,6 +142,8 @@ class Tanecni_jednotka(models.Model):
 	jmeno_tanecnik12 = models.ForeignKey(Tanecnik, related_name='tanecnik12', on_delete=models.SET_NULL, null=True, blank=True)
 	jmeno_tanecnik13 = models.ForeignKey(Tanecnik, related_name='tanecnik13', on_delete=models.SET_NULL, null=True, blank=True)
 	jmeno_tanecnik14 = models.ForeignKey(Tanecnik, related_name='tanecnik14', on_delete=models.SET_NULL, null=True, blank=True)
+	jmeno_tanecnik13 = models.ForeignKey(Tanecnik, related_name='tanecnik15', on_delete=models.SET_NULL, null=True, blank=True)
+	jmeno_tanecnik14 = models.ForeignKey(Tanecnik, related_name='tanecnik16', on_delete=models.SET_NULL, null=True, blank=True)
 
 	def __str__(self):
 		return self.jmeno_tanecni_jednotky

@@ -5,7 +5,11 @@
 
 <div class="container mb shadow" style=" min-height: 100vh; min-width: 90vw;">
   <h2>Tanečníci-přehled</h2>
-  <p>Toto je přehled všech tanečníků ČSAR ve všech registrovaných klubech ČR.</p>            
+  <p>Toto je přehled všech tanečníků ČSAR ve všech registrovaných klubech ČR.</p>
+
+  <br>
+       <a  href="{% url 'pridat_tanecnika' %}" class="btn btn-secondary ">⊕</a>
+  <br>            
   <table class="table table-striped">
     <thead>
       <tr>
@@ -17,8 +21,8 @@
         <th>Rodné č.</th>
         <th>Email</th>
         <th>Telefon</th>
-        <th>Zdravotní-p.</th>
-        <th>ZP</th>
+        <th>Zdravotní-prohlídka</th>
+        <th>Prohlidka potvrzení</th>
         <th>Kopie pasu</th>
         <th>Doping</th>
         <th>CSAR</th>
@@ -42,9 +46,28 @@
         <td>{{tanecnik.email}} </td>
         <td>{{tanecnik.telefon}}</td>
         <td>{{tanecnik.zdravotni_prohlidka}}</td>
-        <td><button type="button" class="btn btn-secondary">ZP-stáhnout</button></td>
-        <td><button type="button" class="btn btn-secondary">PAS-stáhnout</button></td>
-        <td><button type="button" class="btn btn-secondary">DOPING-stáhnout</button></td>
+
+        {% if tanecnik.zdravotni_prohlidka_potvr %}
+        <td><a href="{{tanecnik.zdravotni_prohlidka_potvr.url}}" class="btn btn-secondary" download>ZDP</a></td>
+        {% else %}
+        <td><h6 class="noreg"><b>x</b></h6></td>
+        {% endif %}
+
+        {% if tanecnik.pas %}
+        <td><a href="{{tanecnik.pas.url}}" type="button" class="btn btn-secondary" download>PAS</a></td>
+         {% else %}
+        <td><h6 class="noreg"><b>x</b></h6></td>
+        {% endif %}
+
+
+        {% if tanecnik.doping %}
+        <td><a href="{{tanecnik.doping.url}}" type="button" class="btn btn-secondary" download>DOP</a></td>
+         {% else %}
+        <td><h6 class="noreg"><b>x</b></h6></td>
+        {% endif %}
+
+
+
         {% if tanecnik.Dny_do_nove_registrace_csar == "Registrace ČSAR vypršela." %}
         <td><p class="card-text noreg"><b>N</b></p></td>
         {% else %}
