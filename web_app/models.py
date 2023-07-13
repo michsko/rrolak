@@ -21,7 +21,7 @@ class Profil(models.Model):
 	id_klub = models.IntegerField()
 	logo_klub = models.ImageField(upload_to='klub_logo', default='csar_logo/logo_csar.jpeg')
 	info = models.TextField(blank=True)
-	adressa = models.CharField(max_length=255, blank=True)
+	adresa = models.CharField(max_length=255, blank=True)
 	email = models.CharField(max_length=255, blank=True)
 	telefon = models.CharField(max_length=255, blank=True)
 	aktivni = models.BooleanField(default=True)
@@ -126,8 +126,27 @@ class Tanecnik(models.Model):
 
 
 class Tanecni_jednotka(models.Model):
+	KATEGORIE = [('Děti', 'Kategorie Děti'), 
+	('Žáci', 'Kategorie Žáci'),
+	('Junior', 'Kategorie Junior'),
+	('C', 'Kategorie C'),
+	('B', 'Kategorie B'),
+	('A', 'Kategorie A'),
+	('MDFD', 'Malá Dívčí Formace Děti'),
+	('MDFJ', 'Malá Dívčí Formace Junior'),
+	('MDFS', 'Malá Dívčí Formace Senior'),
+	('DFD', 'Dívčí Formace Děti'),
+	('DFJ', 'Dívčí Formace Junior'),
+	('DFS', 'Dívčí Formace Senior'),
+	('PFJ', 'Párová Formace Junior'),
+	('PFS', 'Párová Formace Senior'),
+	('DG', 'Duo Girls'),
+	('DL', 'Duo Ladies'),]
+
+
 	klub = models.ForeignKey(Klub, on_delete=models.SET_NULL, null=True)
 	jmeno_tanecni_jednotky = models.CharField('Jméno taneční jednotky', max_length=255, blank=True, null=True)
+	kategorie = models.CharField('Kategorie', max_length=128, choices = KATEGORIE, null=True)
 	jmeno_tanecnik1 = models.ForeignKey(Tanecnik, related_name='tanecnik1', on_delete=models.SET_NULL, null=True, blank=True)
 	jmeno_tanecnik2 = models.ForeignKey(Tanecnik, related_name='tanecnik2', on_delete=models.SET_NULL, null=True, blank=True)
 	jmeno_tanecnik3 = models.ForeignKey(Tanecnik, related_name='tanecnik3', on_delete=models.SET_NULL, null=True, blank=True)
@@ -142,9 +161,9 @@ class Tanecni_jednotka(models.Model):
 	jmeno_tanecnik12 = models.ForeignKey(Tanecnik, related_name='tanecnik12', on_delete=models.SET_NULL, null=True, blank=True)
 	jmeno_tanecnik13 = models.ForeignKey(Tanecnik, related_name='tanecnik13', on_delete=models.SET_NULL, null=True, blank=True)
 	jmeno_tanecnik14 = models.ForeignKey(Tanecnik, related_name='tanecnik14', on_delete=models.SET_NULL, null=True, blank=True)
-	jmeno_tanecnik13 = models.ForeignKey(Tanecnik, related_name='tanecnik15', on_delete=models.SET_NULL, null=True, blank=True)
-	jmeno_tanecnik14 = models.ForeignKey(Tanecnik, related_name='tanecnik16', on_delete=models.SET_NULL, null=True, blank=True)
-
+	jmeno_tanecnik15 = models.ForeignKey(Tanecnik, related_name='tanecnik15', on_delete=models.SET_NULL, null=True, blank=True)
+	jmeno_tanecnik16 = models.ForeignKey(Tanecnik, related_name='tanecnik16', on_delete=models.SET_NULL, null=True, blank=True)
+	
 	def __str__(self):
 		return self.jmeno_tanecni_jednotky
 	

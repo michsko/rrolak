@@ -9,7 +9,7 @@
 		<div class="card shadow" style="max-width: 1000px; margin: 10px;">
 			 <div class="row g-0">
 				<div class="col-md-4">
-					<img class="img=fluid " src="{{tanecnik.foto_tanecnik.url}}" style="width: 250px; height: 250px; border-radius: 125px; padding: 10px;"><br>
+					<img class="img=fluid " src="{{tanecnik.foto_tanecnik.url}}" style="width: 250px; height: 250px; border-radius: 60px; padding: 10px;"><br>
 
 					
 				</div>
@@ -25,22 +25,23 @@
 
 
 					{% if tanecnik.Dny_do_nove_registrace_csar == "Registrace ČSAR vypršela." %}
-					<p class="noreg">{{tanecnik.Dny_do_nove_registrace_csar }} </p>
-					{% else %}
-					<p class="reg">{{tanecnik.Dny_do_nove_registrace_csar }} </p>
-					{% endif %}
+				<p class="noreg">{{tanecnik.Dny_do_nove_registrace_csar }} </p>
+				{% else %}
+				<p class="reg">{{tanecnik.Dny_do_nove_registrace_csar }} </p>
+				{% endif %}
 
-					{% if tanecnik.Dny_do_nove_zav_registrace_csar == "Zavodní registrace ČSAR vypršela." %}
-					<p class="noreg">{{tanecnik.Dny_do_nove_zav_registrace_csar }} </p>
-					{% else %}
-					<p class="reg">{{tanecnik.Dny_do_nove_zav_registrace_csar }} </p>
-					{% endif %}
+				{% if tanecnik.Dny_do_nove_zav_registrace_csar == "Zavodní registrace ČSAR vypršela." %}
+				<p class="card-text noreg">{{tanecnik.Dny_do_nove_zav_registrace_csar }} </p>
+				{% else %}
+				<p class="card-text reg">{{tanecnik.Dny_do_nove_zav_registrace_csar }} </p>
+				{% endif %}
 
-					{% if tanecnik.Dny_do_nove_registrace_wrrc == "Registrace WRRC vypršela." %}
-					<p class="noreg">{{tanecnik.Dny_do_nove_registrace_wrrc }} </p>
-					{% else %}
-					<p class="reg">{{tanecnik.Dny_do_nove_registrace_wrrc }} </p>
-					{% endif %}
+				{% if tanecnik.Dny_do_nove_registrace_wrrc == "Registrace WRRC vypršela." %}
+				<p class="card-text noreg">{{tanecnik.Dny_do_nove_registrace_wrrc }} </p>
+				{% else %}
+				<p class="card-text reg">{{tanecnik.Dny_do_nove_registrace_wrrc }} </p>
+				{% endif %}
+				
 				</div>
 				<div style="float:right;">
 					<button type="button" class="btn btn-outline-success" data-bs-toggle="tooltip" title="Timto tlačítkem můžete přejít k registraci." href='' style="margin:15px;">&nbsp;&nbsp;&nbsp;&nbsp;Registr&nbsp;&nbsp;&nbsp;&nbsp;</button>

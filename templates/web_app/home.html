@@ -1,8 +1,36 @@
 	{% extends 'web_app/base.html' %}
-	
+	{% load static %}
 	{% block content %}
 	
+<div class='container'>
+	<br><br><br>
+<center>
+<div class="row row-cols-1 row-cols-md-2 g-4">
+<div class="col">
+<div class="card shadow" style="width: 18rem;">
+  <img src="{% static 'images/csar_logo/logo_csar.jpeg'%}" class="card-img-top" alt="Loko ceskeho svazu akrobatickeho rockenrolu.">
+  <div class="card-body">
+    <h3 class="card-title"><b>Administrace ČSAR</b></h3>
+    <p class="card-text">Zde je místo pro administrátora ČSAR. Registrace klubů a závodů.</p>
+    <a href="#" class="btn btn-primary">Vstoupit</a>
+  </div>
+</div>
+</div>
+<div class="col">
+<div class="card shadow" style="width: 18rem;">
+  <img src="{% static 'images/csar_logo/logo_csar.jpeg'%}"" class="card-img-top" alt="Loko ceskeho svazu akrobatickeho rockenrolu.">
+  <div class="card-body">
+    <h3 class="card-title"><b>Kluby<br>ČSAR</b></h3>
+    <p class="card-text">Management klubů. Registrace tanečníků a jednotek.</p>
+    <a href="{% url 'kluby_prehled' %}" class="btn btn-primary">Vstoupit</a>
+  </div>
+</div>
+</div>
+</center>
+</div>
 
-		<h1 class="title"> Working </h1>
+
+
+
 
 	{% endblock %}
