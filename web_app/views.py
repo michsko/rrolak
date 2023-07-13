@@ -211,9 +211,22 @@ def upravit_tj(request, pk):
 
 
 
+@login_required(login_url="login")
+def tanecni_jednotka(request, pk):
+
+	tanecni_jednotka = Tanecni_jednotka.objects.get(id=pk)
+
+	return render(request, "web_app/tanecni_jednotka.html", {'tanecni_jednotka': tanecni_jednotka})
+
+
+
 
 
 # zavody
+
+
+
+
 @login_required(login_url="login")
 def zavody_prehled(request):
 

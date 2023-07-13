@@ -1,0 +1,60 @@
+{% extends 'web_app/base.html' %}
+{% load static %}
+{% block content %}
+	
+
+<div class="container" style=" min-height: 100vh;">
+	<br/><br/><br/>
+	<h3 class="">&nbsp;&nbsp;<b>{{tanecni_jednotka.klub}}</b></h3><br>
+		<div class="card shadow" style="max-width: 1000px; margin: 10px;">
+			 <div class="row g-0">
+				<div class="col-md-4">
+					
+
+					
+				</div>
+				<div class="col-md-8">
+				<div class="card-body">
+					<h3 class="card-title"><b>{{tanecni_jednotka.jmeno_tanecni_jednotky}} {{tanecnik.prijmeni}}</b></h3><br>
+					
+					<p class="card-text"> datum narozeni: {{tanecnik.datum_narozeni|date:"Y-m-d"}} </p>
+			        <p class="card-text">rodne cislo: {{tanecnik.rodne_cislo}} </p>
+			        <p class="card-text">email: {{tanecnik.email}} </p>
+			        <p class="card-text">telefon: {{tanecnik.telefon}} </p>
+			        <p class="card-text">zdravotni prohlidka do: {{tanecnik.zdravotni_prohlidka|date:"Y-m-d"}}</p>
+
+
+					{% if tanecnik.Dny_do_nove_registrace_csar == "Registrace ČSAR vypršela." %}
+				<p class="noreg">{{tanecnik.Dny_do_nove_registrace_csar }} </p>
+				{% else %}
+				<p class="reg">{{tanecnik.Dny_do_nove_registrace_csar }} </p>
+				{% endif %}
+
+				{% if tanecnik.Dny_do_nove_zav_registrace_csar == "Zavodní registrace ČSAR vypršela." %}
+				<p class="card-text noreg">{{tanecnik.Dny_do_nove_zav_registrace_csar }} </p>
+				{% else %}
+				<p class="card-text reg">{{tanecnik.Dny_do_nove_zav_registrace_csar }} </p>
+				{% endif %}
+
+				{% if tanecnik.Dny_do_nove_registrace_wrrc == "Registrace WRRC vypršela." %}
+				<p class="card-text noreg">{{tanecnik.Dny_do_nove_registrace_wrrc }} </p>
+				{% else %}
+				<p class="card-text reg">{{tanecnik.Dny_do_nove_registrace_wrrc }} </p>
+				{% endif %}
+				
+				</div>
+				<div style="float:right;">
+					<button type="button" class="btn btn-outline-success" data-bs-toggle="tooltip" title="Timto tlačítkem můžete přejít k registraci." href='' style="margin:15px;">&nbsp;&nbsp;&nbsp;&nbsp;Registr&nbsp;&nbsp;&nbsp;&nbsp;</button>
+				
+					<a type="button" class="btn btn-outline-warning" data-bs-toggle="tooltip" title="Timto tlačítkem můžete změnit informace závodníka." href='{% url "upravit_tanecnika" tanecnik.id %}' style="margin:15px;">&nbsp;&nbsp;&nbsp;&nbsp;Upravit&nbsp;&nbsp;&nbsp;&nbsp;</a>
+
+					<a type="button" class="btn btn-outline-danger" data-bs-toggle="tooltip" title="Timto tlačítkem nevratně smažete závodníka." href='{% url "smazat_tanecnika" tanecnik.id %}' style="margin:15px;">&nbsp;&nbsp;&nbsp;&nbsp;Smazat&nbsp;&nbsp;&nbsp;&nbsp;</a>
+				</div>
+				</div>
+
+			</div>
+		</div>
+    
+</div>
+{% endblock %}
+
