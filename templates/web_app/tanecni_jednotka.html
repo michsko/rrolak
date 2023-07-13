@@ -1,18 +1,14 @@
 {% extends 'web_app/base.html' %}
 {% load static %}
 {% block content %}
-	
 
-<div class="container" style=" min-height: 100vh;">
-	<br/><br/><br/>
-	<h3 class="">&nbsp;&nbsp;<b>{{tanecni_jednotka.klub}}</b></h3><br>
-		<div class="card shadow" style="max-width: 1000px; margin: 10px;">
-			 <div class="row g-0">
-				
-				<div class="col-md-8">
-				<div class="card-body">
-					<h3 class="card-title"><b>{{tanecni_jednotka.jmeno_tanecni_jednotky}}</b></h3><br>
-					<table class="table table-striped">
+<div class="container-md">
+	<br><br><br>
+		<h3 class=""><b>{{tanecni_jednotka.klub}}</b></h3><br>
+		
+	
+		<h3 class="card-title"><b>{{tanecni_jednotka.jmeno_tanecni_jednotky}}</b></h3><br>
+		<table class="table table-striped">
     <thead>
       <tr>
         <th>Fotografie</th>
@@ -112,6 +108,7 @@
 			</div>
 		</div>
     
+</div>
 </div>
 {% endblock %}
 
