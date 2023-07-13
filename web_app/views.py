@@ -20,12 +20,15 @@ def home(request):
 
 	return render(request, 'web_app/home.html', {})
 
+
+
 # kluby
 
 def kluby_prehled(request):
 	kluby_prehled = Profil.objects.all()
 
 	return render(request, "web_app/kluby_prehled.html", {'kluby_prehled': kluby_prehled,})
+
 
 
 def login(request):
@@ -45,6 +48,7 @@ def login(request):
 		return render(request, "web_app/login.html", {})
 
 
+
 def logout(request):
 	auth.logout(request)
 	messages.success(request, ('Byy jste odhlašeni.'))
@@ -53,8 +57,19 @@ def logout(request):
 
 
 
+@login_required(login_url='login')
 def klub(request):
-	return render(request, "web_app/klub.html",{})
+	
+	user_object = User.objects.get(username=request.user.username)
+	klub_profile = Profil.objects.get(klub=user_object)
+	tanecnici = Tanecnik.objects.all().filter(klub=user_object)
+
+	return render(request, "web_app/klub.html", 
+		{'klub_profile': klub_profile, 
+		'tanecnici': tanecnici, })
+
+
+
 
 #tanecnici 
 
@@ -65,6 +80,8 @@ def tanecnici(request):
 	
 	return render(request, "web_app/tanecnici.html", {'tanecnici_klub' : tanecnici_klub,})
 
+
+
 @login_required(login_url="login")
 def tanecnik(request, pk):
 
@@ -72,12 +89,16 @@ def tanecnik(request, pk):
 	
 	return render(request, "web_app/tanecnik.html", {'tanecnik' : tanecnik,})
 
+
+
 @login_required(login_url="login")
 def tanecnici_prehled(request):
 
 	tanecnici_prehled = Tanecnik.objects.all()
 
 	return render(request, "web_app/tanecnici_prehled.html", {'tanecnici_prehled': tanecnici_prehled, })
+
+
 
 @login_required(login_url="login")
 def pridat_tanecnika(request):
@@ -96,6 +117,10 @@ def pridat_tanecnika(request):
 
 	return render(request, "web_app/pridat_tanecnika.html", {'form': form, 'submitted': submitted, })
 
+
+
+
+
 @login_required(login_url="login")
 def smazat_tanecnika(request, pk):
 
@@ -103,6 +128,8 @@ def smazat_tanecnika(request, pk):
 	tanecnik.delete()
 	messages.success(request, ('Tanečník byl smazán.'))
 	return redirect('tanecnici_prehled')
+
+
 
 @login_required(login_url="login")
 def upravit_tanecnika(request, pk):
@@ -119,8 +146,10 @@ def upravit_tanecnika(request, pk):
 		return render(request, "web_app/upravit_tanecnika.html", {'tanecnik': tanecnik, 'form': form,})
 
 
-# tanecni jednotka 
 
+
+
+# tanecni jednotka 
 
 @login_required(login_url="login")
 def pridat_tj(request):
@@ -139,6 +168,9 @@ def pridat_tj(request):
 
 	return render(request, "web_app/pridat_tj.html", {'form': form, 'submitted': submitted})
 
+
+
+
 @login_required(login_url="login")
 def smazat_tj(request, pk):
 
@@ -148,12 +180,18 @@ def smazat_tj(request, pk):
 	
 	return redirect('Tanecni_jednotky_prehled')
 
+
+
+
 @login_required(login_url="login")
 def tanecni_jednotky_prehled(request):
 	
 	tanecni_jednotky = Tanecni_jednotka.objects.all()
 
 	return render(request, "web_app/tanecni_jednotky_prehled.html", {'tanecni_jednotky': tanecni_jednotky})
+
+
+
 
 
 @login_required(login_url="login")
@@ -182,6 +220,8 @@ def zavody_prehled(request):
 	tanecni_jednotky = Tanecni_jednotka.objects.all()
 
 	return render(request, "web_app/zavody.html", {'zavody': zavody, 'prihlasky': prihlasky, 'tanecni_jednotky': tanecni_jednotky})
+
+
 
 
 @login_required(login_url="login")
