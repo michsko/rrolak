@@ -72,7 +72,7 @@
 <div class="container-md" style=" min-height: 100vh; min-width: 65vw;">
 
   <br>
-       <a  href="{% url 'pridat_tanecnika' %}" class="btn btn-secondary ">⊕</a>
+       <a  href="{% url 'pridat_tanecnika' %}" class="btn btn-secondary ">⊕ přidat tanečníka</a>
   <br>
   
   <table class="table table-striped">
@@ -169,148 +169,36 @@
 
 
   <div class="tab-pane fade" id="dancergroup-tab-pane" role="tabpanel" aria-labelledby="dancergroup-tab" tabindex="0">
-  	<div class="container" style=" min-height: 100vh; min-width: 65vw;">
+  	<div class="container-md" style=" min-height: 100vh; min-width: 65vw;">
 
-  <br>
-       <a  href="{% url 'pridat_tj' %}" class="btn btn-secondary ">⊕</a>
-  <br>
+  	<br>
+       <a  href="{% url 'pridat_tj' %}" class="btn btn-secondary ">⊕ přidat jednotku</a>
+  	<br><br>
+  	<div style="display: flex; flex-direction: row; flex-wrap: wrap">
+		
+		{% for tanecni_jednotka in tanecni_jednotky %}
+		
+		<div class="card shadow" style="width: 28rem; margin-right: 0px; margin-top: 10px; margin-left: 10px; margin-bottom: 10px;">
+		  <div class="card-body">
+		  	<h5 class="card-card-text"><b>{{tanecni_jednotka.klub}}</b></h5> 
+		    <h6 class="card-card-text">Taneční Jednotka: <b> {{tanecni_jednotka.jmeno_tanecni_jednotky}}</b></h6>
+		     <h6 class="card-card-text">Kategorie: {{tanecni_jednotka.kategorie}}</h6>
+		     
+		  <a href="{% url 'smazat_tj' tanecni_jednotka.id %}" class="btn btn-outline-success"data-bs-toggle="tooltip" title="Timto tlačítkem přejdete na kartu taneční jednotky." href='' style="margin-right:15px; margin-top: 15px; margin-left: 15px; margin-bottom: 15px;">Ukázat TJ</a>
+
+
+		    <a href="{% url 'upravit_tj' tanecni_jednotka.id %}" class="btn btn-outline-warning" data-bs-toggle="tooltip" title="Timto tlačítkem můžete upravit informace o taneční jednotce." href='' style="margin-right:15px; margin-top: 15px; margin-left: 15px; margin-bottom: 15px;">Upravit TJ</a>
+
+		    <a href="{% url 'smazat_tj' tanecni_jednotka.id %}" class="btn btn-outline-danger"data-bs-toggle="tooltip" title="Timto tlačítkem nenávratně smažete taneční jednotku." href='' style="margin-right:15px; margin-top: 15px; margin-left: 15px; margin-bottom: 15px;">Smazat TJ</a>
+
+		  </div>
+		</div>
+
+	    {% endfor %}
+</div>
   
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>Tanecni Jednotka</th>
-        <th>Kategorie</th>
-        <th>Tanečník1</th>
-        <th>Tanečník2</th>
-        <th>Tanečník3</th>
-        <th>Tanečník4</th>
-        <th>Tanečník5</th>
-        <th>Tanečník6</th>
-        <th>Tanečník7</th>
-        <th>Tanečník8</th>
-        <th>Tanečník9</th>
-        <th>Tanečník10</th>
-        <th>Tanečník11</th>
-        <th>Tanečník12</th>
-        <th>Tanečník13</th>
-        <th>Tanečník14</th>
-        <th>Tanečník15</th>
-        <th>Tanečník16</th>
-      </tr>
-
-    </thead>
-
-    	{% for tanecni_jednotka in tanecni_jednotky %}
-      <tbody>  
-      <tr>    
-        <td>{{tanecni_jednotka.jmeno_tanecni_jednotky}}</td>
-        <td>{{tanecni_jednotka.kategorie}}</td>
-        
-        {% if tanecni_jednotka.jmeno_tanecnik1 == None %}
-		<td><p class='noreg'>x</p></td>
-		{% else %}
-
-        <td><p>{{tanecni_jednotka.jmeno_tanecnik1}}</p></td>
-        {% endif %}
-
-        {% if tanecni_jednotka.jmeno_tanecnik2 == None%}
-		<td><p class='noreg'>x</p></td>
-		{% else %}
-        <td>{{tanecni_jednotka.jmeno_tanecnik2}}</td>
-        {% endif %}
-        
-        {% if tanecni_jednotka.jmeno_tanecnik3 == None%}
-		<td><p class='noreg'>x</p></td>
-		{% else %}
-        <td>{{tanecni_jednotka.jmeno_tanecnik3}}</td>
-		{% endif %}
-        
-        {% if tanecni_jednotka.jmeno_tanecnik4 == None%}
-		<td><p class='noreg'>x</p></td>
-		{% else %}
-        <td>{{tanecni_jednotka.jmeno_tanecnik4}}</td>
-        {% endif %}
-        
-        {% if tanecni_jednotka.jmeno_tanecnik5 == None%}
-		<td><p class='noreg'>x</p></td>
-		{% else %}
-        <td>{{tanecni_jednotka.jmeno_tanecnik5}}</td>
-        {% endif %}
-        
-        {% if tanecni_jednotka.jmeno_tanecnik6 == None%}
-		<td><p class='noreg'>x</p></td>
-		{% else %}
-        <td>{{tanecni_jednotka.jmeno_tanecnik6}}</td>
-        {% endif %}
-        
-        {% if tanecni_jednotka.jmeno_tanecnik7 == None%}
-		<td><p class='noreg'>x</p></td>
-		{% else %}
-        <td>{{tanecni_jednotka.jmeno_tanecnik7}}</td>
-        {% endif %}
-        
-        {% if tanecni_jednotka.jmeno_tanecnik8 == None%}
-		<td><p class='noreg'>x</p></td>
-		{% else %}
-        <td>{{tanecni_jednotka.jmeno_tanecnik8}}</td>
-        {% endif %}
-        
-        {% if tanecni_jednotka.jmeno_tanecnik9 == None%}
-		<td><p class='noreg'>x</p></td>
-		{% else %}
-        <td>{{tanecni_jednotka.jmeno_tanecnik9}}</td>
-        {% endif %}
-        
-        {% if tanecni_jednotka.jmeno_tanecnik10 == None%}
-		<td><p class='noreg'>x</p></td>
-		{% else %}
-        <td>{{tanecni_jednotka.jmeno_tanecnik10}}</td>
-        {% endif %}
-        
-        {% if tanecni_jednotka.jmeno_tanecnik11 == None%}
-		<td><p class='noreg'>x</p></td>
-		{% else %}
-        <td>{{tanecni_jednotka.jmeno_tanecnik11}}</td>
-        {% endif %}
-        
-        {% if tanecni_jednotka.jmeno_tanecnik12 == None%}
-		<td><p class='noreg'>x</p></td>
-		{% else %}
-        <td>{{tanecni_jednotka.jmeno_tanecnik12}}</td>
-        {% endif %}
-        
-        {% if tanecni_jednotka.jmeno_tanecnik13 == None%}
-		<td><p class='noreg'>x</p></td>
-		{% else %}
-        <td>{{tanecni_jednotka.jmeno_tanecnik13}}</td>
-        {% endif %}
-        
-        {% if tanecni_jednotka.jmeno_tanecnik14 == None%}
-		<td><p class='noreg'>x</p></td>
-		{% else %}
-        <td>{{tanecni_jednotka.jmeno_tanecnik14}}</td>
-        {% endif %}
-        
-        {% if tanecni_jednotka.jmeno_tanecnik15 == None%}
-		<td><p class='noreg'>x</p></td>
-		{% else %}
-        <td>{{tanecni_jednotka.jmeno_tanecnik15}}</td>
-        {% endif %}
-        
-        {% if tanecni_jednotka.jmeno_tanecnik16 == None%}
-		<td><p class='noreg'>x</p></td>
-		{% else %}
-        <td>{{tanecni_jednotka.jmeno_tanecnik16}}</td>
-		{% endif %}
-          
-      </tr>
-    </tbody>
-    {% endfor %}
-  </table>
-
 </div>
 
-</div>
 
 
 
