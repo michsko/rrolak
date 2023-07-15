@@ -12,12 +12,31 @@
   <li class="nav-item" role="presentation">
     <button class="nav-link active" id="info-tab" data-bs-toggle="tab" data-bs-target="#info-tab-pane" type="button" role="tab" aria-controls="info-tab-pane" aria-selected="true">Informace </button>
   </li>
+  
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="vedouci-tab" data-bs-toggle="tab" data-bs-target="#vedouci-tab-pane" type="button" role="tab" aria-controls="vedouci-tab-pane" aria-selected="false">Vedoucí oddílu</button>
+  </li>
+  
   <li class="nav-item" role="presentation">
     <button class="nav-link" id="dancer-tab" data-bs-toggle="tab" data-bs-target="#dancer-tab-pane" type="button" role="tab" aria-controls="dancer-tab-pane" aria-selected="false">Tanečníci</button>
   </li>
+  
   <li class="nav-item" role="presentation">
     <button class="nav-link" id="dancergroup-tab" data-bs-toggle="tab" data-bs-target="#dancergroup-tab-pane" type="button" role="tab" aria-controls="dancergroup-tab-pane" aria-selected="false">Taneční jednotky</button>
   </li>
+  
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="treneri-tab" data-bs-toggle="tab" data-bs-target="#treneri-tab-pane" type="button" role="tab" aria-controls="treneri-tab-pane" aria-selected="false">Trenéři</button>
+  </li>
+
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="porotce-tab" data-bs-toggle="tab" data-bs-target="#porotce-tab-pane" type="button" role="tab" aria-controls="porotce-tab-pane" aria-selected="false">Porotci</button>
+  </li>
+
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="dozor-tab" data-bs-toggle="tab" data-bs-target="#dozor-tab-pane" type="button" role="tab" aria-controls="dozor-tab-pane" aria-selected="false">Odborný dozor</button>
+  </li>
+
   <li class="nav-item" role="presentation">
     <button class="nav-link" id="zavody-tab" data-bs-toggle="tab" data-bs-target="#zavody-tab-pane" type="button" role="tab" aria-controls="zavody-tab-pane" aria-selected="false">Závody</button>
   </li>
@@ -59,6 +78,12 @@
     </div>
 
   </div>
+
+
+<!-- here is a vedouci oddilu nav -->
+
+
+<div class="tab-pane fade" id="vedouci-tab-pane" role="tabpanel" aria-labelledby="vedouci-tab" tabindex="0">vedouci oddilu</div>
 
 
 
@@ -134,21 +159,21 @@
 
 
         {% if tanecnik.Dny_do_nove_registrace_csar == "Registrace ČSAR vypršela." %}
-        <td><p class="card-text noreg"><b>N</b></p><td>
+        <td><p class="card-text noreg"><b>N</b></p></td>
         {% else %}
-        <td><p class="card-textv reg"><b>R</b></p><td>
+        <td><p class="card-textv reg"><b>R</b></p></td>
         {% endif %}
 
         {% if tanecnik.Dny_do_nove_zav_registrace_csar == "Zavodní registrace ČSAR vypršela." %}
-        <td><p class="card-text noreg"><b>N</b></p><td>
+        <td><p class="card-text noreg"><b>N</b></p></td>
         {% else %}
-        <td><p class="card-text reg"><b>R</b></p><td>
+        <td><p class="card-text reg"><b>R</b></p></td>
         {% endif %}
 
         {% if tanecnik.Dny_do_nove_registrace_wrrc == "Registrace WRRC vypršela." %}
-        <td><p class="card-text noreg"><b>N</b></p><td>
+        <td><p class="card-text noreg"><b>N</b></p></td>
         {% else %}
-        <td><p class="card-text reg"><b>R</b></p><td>
+        <td><p class="card-text reg"><b>R</b></p></td>
         {% endif %}
 
         <td><a href="{% url 'tanecnik' tanecnik.id %}" class="btn btn-secondary">Profil</a></td>
@@ -160,7 +185,7 @@
 
 </div>
 </div>
-</div>
+
 
 
 
@@ -195,16 +220,254 @@
 		</div>
 
 	    {% endfor %}
-</div>
+    </div>
   
+    </div>
+
+</div>
+
+
+
+<!-- here is a treneri nav -->
+
+
+
+  <div class="tab-pane fade" id="treneri-tab-pane" role="tabpanel" aria-labelledby="treneri-tab" tabindex="0">
+
+
+<div class="container-md" style=" min-height: 100vh; min-width: 65vw;">
+
+  <br>
+      
+  
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Klub</th>
+        <th>Fotografie</th>
+        <th>Jméno</th>
+        <th>Příjmení</th>
+        
+        <th>Rodné č.</th>
+        <th>Email</th>
+        <th>Telefon</th>
+        <th>CSAR</th>
+        <th>Trenér/ka</th>
+        
+        <th>Profil</th>
+
+        
+      </tr>
+    </thead>
+    	
+      {% for tanecnik in tanecnici %}
+      {% if tanecnik.trener == True %}
+      
+
+      <tbody>  
+      <tr>
+        <td>{{tanecnik.klub}}</td>
+        <td><img src="{{tanecnik.foto_tanecnik.url}}" class="card-img-top" alt="profile photo" style="width: 35px; height: 35px; border-radius: 15px; padding: 2px;"></td>
+        <td>{{tanecnik.jmeno}}</td>
+        <td>{{tanecnik.prijmeni}}</td>
+        
+        <td>{{tanecnik.rodne_cislo}}</td>
+        <td>{{tanecnik.email}} </td>
+        <td>{{tanecnik.telefon}}</td>
+       
+        
+
+        
+        {% if tanecnik.Dny_do_nove_registrace_csar == "Registrace ČSAR vypršela." %}
+        <td><p class="card-text noreg"><b>N</b></p></td>
+        {% else %}
+        <td><p class="card-textv reg"><b>R</b></p></td>
+        {% endif %}
+
+        
+        {% if tanecnik.trener == False %}</td>
+        <td><p class="card-text noreg"><b>x</b></p></td>
+        {% else %}
+        <td><p class="card-text reg"><b>✓</b></p></td>
+        {% endif %}
+
+        <td><a href="{% url 'tanecnik' tanecnik.id %}" class="btn btn-secondary">Profil</a></td>
+        
+      </tr>
+    </tbody>
+    
+    {% endif %}
+    {% endfor %}
+     </table>
+    
+ 
+
+</div>
+</div>
+
+<!-- here is a porota nav -->
+
+
+  <div class="tab-pane fade" id="porotce-tab-pane" role="tabpanel" aria-labelledby="porotce-tab" tabindex="0"><div class="container-md" style=" min-height: 100vh; min-width: 65vw;">
+
+  <br>
+        
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Klub</th>
+        <th>Fotografie</th>
+        <th>Jméno</th>
+        <th>Příjmení</th>
+        
+        <th>Rodné č.</th>
+        <th>Email</th>
+        <th>Telefon</th>
+        <th>CSAR</th>
+        <th>Porotce</th>
+        
+        <th>Profil</th>
+
+        
+      </tr>
+    </thead>
+    	
+      {% for tanecnik in tanecnici %}
+      {% if tanecnik.porotce == True %}
+      
+
+      <tbody>  
+      <tr>
+        <td>{{tanecnik.klub}}</td>
+        <td><img src="{{tanecnik.foto_tanecnik.url}}" class="card-img-top" alt="profile photo" style="width: 35px; height: 35px; border-radius: 15px; padding: 2px;"></td>
+        <td>{{tanecnik.jmeno}}</td>
+        <td>{{tanecnik.prijmeni}}</td>
+        
+        <td>{{tanecnik.rodne_cislo}}</td>
+        <td>{{tanecnik.email}} </td>
+        <td>{{tanecnik.telefon}}</td>
+       
+        
+
+        
+        {% if tanecnik.Dny_do_nove_registrace_csar == "Registrace ČSAR vypršela." %}
+        <td><p class="card-text noreg"><b>N</b></p></td>
+        {% else %}
+        <td><p class="card-textv reg"><b>R</b></p></td>
+        {% endif %}
+
+        
+        {% if tanecnik.porotce == False %}</td>
+        <td><p class="card-text noreg"><b>x</b></p></td>
+        {% else %}
+        <td><p class="card-text reg"><b>✓</b></p></td>
+        {% endif %}
+
+        <td><a href="{% url 'tanecnik' tanecnik.id %}" class="btn btn-secondary">Profil</a></td>
+        
+      </tr>
+    </tbody>
+
+    {% endif %}
+    {% endfor %}
+     </table>
+    
+ 
+
+</div>
+</div>
+
+
+
+
+<!-- here is odborny dozor  nav -->
+
+
+  <div class="tab-pane fade" id="dozor-tab-pane" role="tabpanel" aria-labelledby="dozor-tab" tabindex="0">
+  	<div class="container-md" style=" min-height: 100vh; min-width: 65vw;">
+
+  <br>
+ 
+  
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Klub</th>
+        <th>Fotografie</th>
+        <th>Jméno</th>
+        <th>Příjmení</th>
+        
+        <th>Rodné č.</th>
+        <th>Email</th>
+        <th>Telefon</th>
+        <th>CSAR</th>
+        <th>Odborný dozor</th>
+        
+        <th>Profil</th>
+
+        
+      </tr>
+    </thead>
+    	
+      {% for tanecnik in tanecnici %}
+      {% if tanecnik.trener == True %}
+      
+
+      <tbody>  
+      <tr>
+        <td>{{tanecnik.klub}}</td>
+        <td><img src="{{tanecnik.foto_tanecnik.url}}" class="card-img-top" alt="profile photo" style="width: 35px; height: 35px; border-radius: 15px; padding: 2px;"></td>
+        <td>{{tanecnik.jmeno}}</td>
+        <td>{{tanecnik.prijmeni}}</td>
+        
+        <td>{{tanecnik.rodne_cislo}}</td>
+        <td>{{tanecnik.email}} </td>
+        <td>{{tanecnik.telefon}}</td>
+       
+        
+
+        
+        {% if tanecnik.Dny_do_nove_registrace_csar == "Registrace ČSAR vypršela." %}
+        <td><p class="card-text noreg"><b>N</b></p></td>
+        {% else %}
+        <td><p class="card-textv reg"><b>R</b></p></td>
+        {% endif %}
+
+        
+        {% if tanecnik.dozor == False %}</td>
+        <td><p class="card-text noreg"><b>x</b></p></td>
+        {% else %}
+        <td><p class="card-text reg"><b>✓</b></p></td>
+        {% endif %}
+
+        <td><a href="{% url 'tanecnik' tanecnik.id %}" class="btn btn-secondary">Profil</a></td>
+        
+      </tr>
+    </tbody>
+    
+    {% endif %}
+    {% endfor %}
+     </table>
+    
+</div>
 </div>
 
 
 
 
 
+
+<!-- here is a tanecni zavody  nav -->
 
   <div class="tab-pane fade" id="zavody-tab-pane" role="tabpanel" aria-labelledby="zavody-tab" tabindex="0">zavody</div>
+
+</div>
+
+
+
+
+<!-- here is a faktury nav -->
+
   <div class="tab-pane fade" id="faktury-tab-pane" role="tabpanel" aria-labelledby="faktury-tab" tabindex="0">faktury</div>
 </div>
 

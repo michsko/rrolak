@@ -61,7 +61,7 @@ class Tanecnik(models.Model):
 	datum_registrace_wrrc = models.DateField(auto_now_add=True, null=True, blank = True)
 	registrace_wrrc_do = models.DateField(default=platnost, null=True, blank=True)
 	
-	
+	tanecnik = models.BooleanField('Tanečník', default=False, blank=True, null=True)
 	trener = models.BooleanField('Trenér', default=False, blank=True, null=True)
 	porotce = models.BooleanField('Porotce', default=False, blank=True, null=True)
 	odborny_dozor = models.BooleanField("Odborný dozor", default=False, blank=True, null=True)

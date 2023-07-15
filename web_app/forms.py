@@ -15,7 +15,7 @@ class TanecnikForm(ModelForm):
 		model = Tanecnik
 		fields =('klub', 'foto_tanecnik', 'jmeno', 'prijmeni', 'datum_narozeni', 'rodne_cislo', 
 	'email', 'adresa', 'telefon', 'zdravotni_prohlidka', 'zdravotni_prohlidka_potvr', 
-	'pas', 'doping', 'registr_csar', 'registr_zavodni_csar', 'registr_wrrc')
+	'pas', 'doping', 'registr_csar', 'registr_zavodni_csar', 'registr_wrrc', 'tanecnik', 'trener', 'porotce', 'odborny_dozor')
 
 		labels = {'klub':'Klub', 
 		'foto_tanecnik': 'Foto tanecníka',
@@ -46,6 +46,10 @@ class TanecnikForm(ModelForm):
 		'registr_csar': forms.CheckboxInput(attrs={'class': 'form-check form-check-inline'}), 
 		'registr_zavodni_csar': forms.CheckboxInput(attrs={'class': 'form-check form-check-inline'}),
 		'registr_wrrc': forms.CheckboxInput(attrs={'class': 'form-check form-check-inline'}),
+		'tanecnik': forms.CheckboxInput(attrs={'class': 'form-check form-check-inline'}), 
+		'trener': forms.CheckboxInput(attrs={'class': 'form-check form-check-inline'}),
+		'porotce': forms.CheckboxInput(attrs={'class': 'form-check form-check-inline'}),
+		'odborny_dozor': forms.CheckboxInput(attrs={'class': 'form-check form-check-inline'})
 		}
 	
 	

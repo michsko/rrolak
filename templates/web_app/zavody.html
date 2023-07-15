@@ -34,6 +34,8 @@
 		<th>PFS </th>
 		<th>DG </th>
 		<th>DL </th>
+		<th>BW </th>
+		<th>FSm </th>
 		<th>Závod</th>
 		<th>Přihlásit </th>
 	  </tr>
@@ -123,6 +125,17 @@
 		{% else %}
 		<td><p class="noreg"> x </p></td>
 		{% endif %}
+		{% if zavod.kategorie_bw == True %}
+		<td><p class="reg"> ✓ </p></td>
+		{% else %}
+		<td><p class="noreg"> x </p></td>
+		{% endif %}
+		{% if zavod.kategorie_fsm == True %}
+		<td><p class="reg"> ✓ </p></td>
+		{% else %}
+		<td><p class="noreg"> x </p></td>
+		{% endif %}
+
 		<td><a type="button" class="btn btn-secondary" href="{% url 'prihlasky_prehled' zavod.id %}">INFO</a></td>
 		<td><a type="button" class="btn btn-secondary">PŘIHLÁSIT</a></td>
 	</tr>
