@@ -1,44 +1,119 @@
 {% extends 'web_app/base.html' %}
 {% load static %}
 {% block content %}
+
+<div class="container-md">
+	<br><br><br>
+		<h3 class=""><b>{{tanecni_jednotka.klub}}</b></h3><br>
+		
 	
+		<h3 class="card-title"><b>{{tanecni_jednotka.jmeno_tanecni_jednotky}}</b></h3><br>
+		<table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Fotografie</th>
+        <th>Jméno</th>
+        <th>Příjmení</th>
+        <th>Dat.narození</th>
+        <th>Rodné č.</th>
+        <th>Email</th>
+        <th>Telefon</th>
+        <th>Zdravotní-prohlídka</th>
+        <th>Prohlidka potvrzení</th>
+        <th>Kopie pasu</th>
+        <th>Doping</th>
+        <th>CSAR</th>
+        <th>Zavody CSAR</th>
+        <th>WRRC</th>
+        <th>Profil</th>
 
-<div class="container" style=" min-height: 100vh;">
-	<br/><br/><br/>
-	<h3 class="">&nbsp;&nbsp;<b>{{tanecni_jednotka.klub}}</b></h3><br>
-		<div class="card shadow" style="max-width: 1000px; margin: 10px;">
-			 <div class="row g-0">
-				<div class="col-md-4">
-					
+        
+      </tr>
+    </thead>
+    
+      {% for tanecnik in tanecnici_prehled %}
+      <tbody>  
+      <tr>
+        <td>{{tanecnik.klub}}</td>
+        <td><img src="{{tanecnik.foto_tanecnik.url}}" class="card-img-top" alt="profile photo" style="width: 35px; height: 35px; border-radius: 15px; padding: 2px;"></td>
+        <td>{{tanecnik.jmeno}}</td>
+        <td>{{tanecnik.prijmeni}}</td>
+        <td>{{tanecnik.datum_narozeni|date:"Y-m-d"}}</td>
+        <td>{{tanecnik.rodne_cislo}}</td>
+        <td>{{tanecnik.email}} </td>
+        <td>{{tanecnik.telefon}}</td>
+        <td>{{tanecnik.zdravotni_prohlidka}}</td>
 
-					
-				</div>
-				<div class="col-md-8">
-				<div class="card-body">
-					<h3 class="card-title"><b>{{tanecni_jednotka.jmeno_tanecni_jednotky}} {{tanecnik.prijmeni}}</b></h3><br>
-					
-					<p class="card-text"> datum narozeni: {{tanecnik.datum_narozeni|date:"Y-m-d"}} </p>
-			        <p class="card-text">rodne cislo: {{tanecnik.rodne_cislo}} </p>
-			        <p class="card-text">email: {{tanecnik.email}} </p>
-			        <p class="card-text">telefon: {{tanecnik.telefon}} </p>
-			        <p class="card-text">zdravotni prohlidka do: {{tanecnik.zdravotni_prohlidka|date:"Y-m-d"}}</p>
+        {% if tanecnik.zdravotni_prohlidka_potvr %}
+        <td><a href="{{tanecnik.zdravotni_prohlidka_potvr.url}}" class="btn btn-secondary" download>ZDP</a></td>
+        {% else %}
+        <td><h6 class="noreg"><b>x</b></h6></td>
+        {% endif %}
+
+        {% if tanecnik.pas %}
+        <td><a href="{{tanecnik.pas.url}}" type="button" class="btn btn-secondary" download>PAS</a></td>
+         {% else %}
+        <td><h6 class="noreg"><b>x</b></h6></td>
+        {% endif %}
 
 
+<<<<<<< HEAD
 					
 				
+=======
+        {% if tanecnik.doping %}
+        <td><a href="{{tanecnik.doping.url}}" type="button" class="btn btn-secondary" download>DOP</a></td>
+         {% else %}
+        <td><h6 class="noreg"><b>x</b></h6></td>
+        {% endif %}
+
+
+
+        {% if tanecnik.Dny_do_nove_registrace_csar == "Registrace ČSAR vypršela." %}
+        <td><p class="card-text noreg"><b>N</b></p></td>
+        {% else %}
+        <td><p class="card-textv reg"><b>R</b></p></td>
+        {% endif %}
+
+        {% if tanecnik.Dny_do_nove_zav_registrace_csar == "Zavodní registrace ČSAR vypršela." %}
+        <td><p class="card-text noreg"><b>N</b></p></td>
+        {% else %}
+        <td><p class="card-text reg"><b>R</b></p></td>
+        {% endif %}
+
+        {% if tanecnik.Dny_do_nove_registrace_wrrc == "Registrace WRRC vypršela." %}
+        <td><p class="card-text noreg"><b>N</b></p></td>
+        {% else %}
+        <td><p class="card-text reg"><b>R</b></p></td>
+        {% endif %}
+
+        <td><a href="{% url 'tanecnik' tanecnik.id %}" class="btn btn-secondary">Profil</a></td>
+        
+      </tr>
+      
+        
+      
+    </tbody>
+    {% endfor %}
+  </table>
+
+
+
+>>>>>>> d320d49081a731584a9fdbbf70003f045af04f48
 				</div>
 				<div style="float:right;">
-					<button type="button" class="btn btn-outline-success" data-bs-toggle="tooltip" title="Timto tlačítkem můžete přejít k registraci." href='' style="margin:15px;">&nbsp;&nbsp;&nbsp;&nbsp;Registr&nbsp;&nbsp;&nbsp;&nbsp;</button>
 				
-					<a type="button" class="btn btn-outline-warning" data-bs-toggle="tooltip" title="Timto tlačítkem můžete změnit informace závodníka." href='{% url "upravit_tanecnika" tanecnik.id %}' style="margin:15px;">&nbsp;&nbsp;&nbsp;&nbsp;Upravit&nbsp;&nbsp;&nbsp;&nbsp;</a>
 
-					<a type="button" class="btn btn-outline-danger" data-bs-toggle="tooltip" title="Timto tlačítkem nevratně smažete závodníka." href='{% url "smazat_tanecnika" tanecnik.id %}' style="margin:15px;">&nbsp;&nbsp;&nbsp;&nbsp;Smazat&nbsp;&nbsp;&nbsp;&nbsp;</a>
+			    <a href="{% url 'upravit_tj' tanecni_jednotka.id %}" class="btn btn-outline-warning" data-bs-toggle="tooltip" title="Timto tlačítkem můžete upravit informace o taneční jednotce." href='' style="margin-right:15px; margin-top: 15px; margin-left: 15px; margin-bottom: 15px;">Upravit TJ</a>
+
+			    <a href="{% url 'smazat_tj' tanecni_jednotka.id %}" class="btn btn-outline-danger"data-bs-toggle="tooltip" title="Timto tlačítkem nenávratně smažete taneční jednotku." href='' style="margin-right:15px; margin-top: 15px; margin-left: 15px; margin-bottom: 15px;">Smazat TJ</a>
 				</div>
 				</div>
 
 			</div>
 		</div>
     
+</div>
 </div>
 {% endblock %}
 

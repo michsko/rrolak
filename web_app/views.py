@@ -216,7 +216,11 @@ def tanecni_jednotka(request, pk):
 
 	tanecni_jednotka = Tanecni_jednotka.objects.get(id=pk)
 
-	return render(request, "web_app/tanecni_jednotka.html", {'tanecni_jednotka': tanecni_jednotka})
+	tanecnici = Tanecni_jednotka.objects.select_related().filter(id=pk)
+
+
+
+	return render(request, "web_app/tanecni_jednotka.html", {'tanecni_jednotka': tanecni_jednotka, 'tanecnici': tanecnici})
 
 
 
@@ -244,7 +248,7 @@ def prihlasky_prehled(request, pk):
 
 	zavod = Zavod.objects.get(id=pk)
 
-	prihlasky = Prihlaska_zavod.objects.filter(zavod_id = pk)
+	prihlasky = Prihlaska_zavod.objects.filter(zavod_id=pk)
 	
 
 	return render(request, "web_app/prihlasky_prehled.html", {'prihlasky': prihlasky, 'zavod': zavod})

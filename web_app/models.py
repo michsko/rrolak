@@ -62,6 +62,10 @@ class Tanecnik(models.Model):
 	registrace_wrrc_do = models.DateField(default=platnost, null=True, blank=True)
 	
 	
+	trener = models.BooleanField('Trenér', default=False, blank=True, null=True)
+	porotce = models.BooleanField('Porotce', default=False, blank=True, null=True)
+	odborny_dozor = models.BooleanField("Odborný dozor", default=False, blank=True, null=True)
+
 
 	def __str__(self):
 		return self.jmeno + " " + self.prijmeni + " " + str(self.datum_narozeni) + " " + str(self.rodne_cislo)
@@ -141,7 +145,9 @@ class Tanecni_jednotka(models.Model):
 	('PFJ', 'Párová Formace Junior'),
 	('PFS', 'Párová Formace Senior'),
 	('DG', 'Duo Girls'),
-	('DL', 'Duo Ladies'),]
+	('DL', 'Duo Ladies'),
+	('BW', 'Boogie Woogie'), 
+	('FSm', 'Formace smíšený věk'),]
 
 
 	klub = models.ForeignKey(Klub, on_delete=models.SET_NULL, null=True)
@@ -188,7 +194,8 @@ class Zavod(models.Model):
 	kategorie_fs = models.BooleanField('Párová Formace Senior', default=False, blank=True, null=True)
 	kategorie_dg = models.BooleanField('Duo Girls', default=False, blank=True, null=True)
 	kategorie_dl = models.BooleanField('Duo Ladies', default=False, blank=True, null=True)
-
+	kategorie_bw = models.BooleanField('Boogie Woogie', default=False, blank=True, null=True)
+	kategorie_fsm = models.BooleanField('Formace smíšený věk', default=False, blank=True, null=True)
 
 	def __str__ (self):
 		return self.jmeno_souteze
