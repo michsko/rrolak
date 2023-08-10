@@ -1,12 +1,12 @@
 from django.db import models
-from django.contrib.auth import get_user_model
+from django.contrib.auth.models import User
 from datetime import date
 from datetime import datetime
 from datetime import timedelta
 import time
 
 
-Klub = get_user_model()
+Klub = User
 
 
 def platnost():
@@ -17,8 +17,7 @@ def platnost():
 
 
 class Profil(models.Model):
-	klub = models.ForeignKey(Klub, on_delete=models.SET_NULL, null=True)
-	id_klub = models.IntegerField()
+	klub = models.OneToOneField(Klub, on_delete=models.SET_NULL, null=True)
 	logo_klub = models.ImageField(upload_to='klub_logo', default='csar_logo/logo_csar.jpeg')
 	info = models.TextField(blank=True)
 	adresa = models.CharField(max_length=255, blank=True)
@@ -27,7 +26,8 @@ class Profil(models.Model):
 	aktivni = models.BooleanField(default=True)
 
 	def __str__ (self):
-		return self.klub.username
+		return self.klub.username 
+
 
 
 class Tanecnik(models.Model):
@@ -36,7 +36,7 @@ class Tanecnik(models.Model):
 	jmeno = models.CharField('Jméno', max_length=255, blank=False)
 	prijmeni = models.CharField('Příjmení',max_length=255, blank=False)
 	datum_narozeni = models.DateField('Datum narození', blank=False)
-	rodne_cislo = models.IntegerField('Rodné číslo', blank=False)
+	rodne_cislo = models.IntegerField('Rodné číslo', blank=False, unique=True)
 	email = models.EmailField('Email', blank=False)
 	adresa = models.TextField('Adresa', blank=True, null=True)
 	telefon = models.CharField('Telefonní číslo', max_length=255, blank=False)
@@ -68,7 +68,7 @@ class Tanecnik(models.Model):
 
 
 	def __str__(self):
-		return self.jmeno + " " + self.prijmeni + " " + str(self.datum_narozeni) + " " + str(self.rodne_cislo)
+		return self.jmeno + " " + self.prijmeni + " d.n " + str(self.datum_narozeni) + " r.c " + str(self.rodne_cislo)
 
 
 	@property
@@ -128,6 +128,33 @@ class Tanecnik(models.Model):
 	"""
 		
 
+	def check_rc(self):
+		rc_length = len(str(self.rodne_cislo))
+		rodne_c = str(self.rodne_cislo)
+		digits = []
+		check = 1
+
+		for digit in rodne_c:
+
+				digits.append(int(digit))
+
+				together = sum(digits)
+				check = together % 11 
+
+		if rc_length == "10" or rc_length == "9" and check == 0:
+			
+			return "Rodné číslo je v pořádku."
+
+
+		else: 
+			return "Rodné číslo neodpovídá standartní délce nebo formátu rodného čísla."
+
+
+	def save(self, *args, **kwargs):
+		self.check_rc()
+		super(Tanecnik, self).save(*args, **kwargs)
+
+
 
 class Tanecni_jednotka(models.Model):
 	KATEGORIE = [('Děti', 'Kategorie Děti'), 
@@ -150,25 +177,10 @@ class Tanecni_jednotka(models.Model):
 	('FSm', 'Formace smíšený věk'),]
 
 
-	klub = models.ForeignKey(Klub, on_delete=models.SET_NULL, null=True)
+	klub = models.ForeignKey(Profil, on_delete=models.SET_NULL, null=True)
 	jmeno_tanecni_jednotky = models.CharField('Jméno taneční jednotky', max_length=255, blank=True, null=True)
 	kategorie = models.CharField('Kategorie', max_length=128, choices = KATEGORIE, null=True)
-	jmeno_tanecnik1 = models.ForeignKey(Tanecnik, related_name='tanecnik1', on_delete=models.SET_NULL, null=True, blank=True)
-	jmeno_tanecnik2 = models.ForeignKey(Tanecnik, related_name='tanecnik2', on_delete=models.SET_NULL, null=True, blank=True)
-	jmeno_tanecnik3 = models.ForeignKey(Tanecnik, related_name='tanecnik3', on_delete=models.SET_NULL, null=True, blank=True)
-	jmeno_tanecnik4 = models.ForeignKey(Tanecnik, related_name='tanecnik4', on_delete=models.SET_NULL, null=True, blank=True)
-	jmeno_tanecnik5 = models.ForeignKey(Tanecnik, related_name='tanecnik5', on_delete=models.SET_NULL, null=True, blank=True)	
-	jmeno_tanecnik6 = models.ForeignKey(Tanecnik, related_name='tanecnik6', on_delete=models.SET_NULL, null=True, blank=True)
-	jmeno_tanecnik7 = models.ForeignKey(Tanecnik, related_name='tanecnik7', on_delete=models.SET_NULL, null=True, blank=True)
-	jmeno_tanecnik8 = models.ForeignKey(Tanecnik, related_name='tanecnik8', on_delete=models.SET_NULL, null=True, blank=True)
-	jmeno_tanecnik9 = models.ForeignKey(Tanecnik, related_name='tanecnik9', on_delete=models.SET_NULL, null=True, blank=True)
-	jmeno_tanecnik10 = models.ForeignKey(Tanecnik, related_name='tanecnik10', on_delete=models.SET_NULL, null=True, blank=True)
-	jmeno_tanecnik11 = models.ForeignKey(Tanecnik, related_name='tanecnik11', on_delete=models.SET_NULL, null=True, blank=True)
-	jmeno_tanecnik12 = models.ForeignKey(Tanecnik, related_name='tanecnik12', on_delete=models.SET_NULL, null=True, blank=True)
-	jmeno_tanecnik13 = models.ForeignKey(Tanecnik, related_name='tanecnik13', on_delete=models.SET_NULL, null=True, blank=True)
-	jmeno_tanecnik14 = models.ForeignKey(Tanecnik, related_name='tanecnik14', on_delete=models.SET_NULL, null=True, blank=True)
-	jmeno_tanecnik15 = models.ForeignKey(Tanecnik, related_name='tanecnik15', on_delete=models.SET_NULL, null=True, blank=True)
-	jmeno_tanecnik16 = models.ForeignKey(Tanecnik, related_name='tanecnik16', on_delete=models.SET_NULL, null=True, blank=True)
+	tanecnici = models.ForeignKey(Tanecnik, on_delete=models.SET_NULL, null=True)
 	
 	def __str__(self):
 		return self.jmeno_tanecni_jednotky

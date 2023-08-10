@@ -4,6 +4,7 @@ from django.contrib import messages
 from django.contrib.auth.models import User, auth
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
+from django.forms import inlineformset_factory
 from .models import Tanecnik
 from .models import Zavod
 from .models import Prihlaska_zavod
@@ -51,7 +52,7 @@ def login(request):
 
 def logout(request):
 	auth.logout(request)
-	messages.success(request, ('Byy jste odhlašeni.'))
+	messages.success(request, ('Byly jste odhlašeni.'))
 
 	return redirect('login')
 
@@ -61,14 +62,17 @@ def logout(request):
 def klub(request):
 	
 	user_object = User.objects.get(username=request.user.username)
-	klub_profile = Profil.objects.get(klub=user_object)
+	
+	profil_user_object = Profil.objects.get(klub=user_object)
 	tanecnici = Tanecnik.objects.all().filter(klub=user_object)
-	tanecni_jednotky = Tanecni_jednotka.objects.all().filter(klub=user_object)
+	tanecni_jednotky = Tanecni_jednotka.objects.all().filter(klub=profil_user_object)
+	
 
 	return render(request, "web_app/klub.html", 
-		{'klub_profile': klub_profile, 
+		{'user_object': user_object,
+		'profil_user_object': profil_user_object,
 		'tanecnici': tanecnici,
-		'tanecni_jednotky': tanecni_jednotky})
+		'tanecni_jednotky': tanecni_jednotky,})
 
 
 
@@ -111,13 +115,18 @@ def pridat_tanecnika(request):
 		if form.is_valid():
 			form.save()
 			messages.success(request,("Tanečník byl úspěšně přidán."))
-			return redirect("tanecnici_prehled")
+		else:
+			messages.error(request, ("Zkontrolujte udaje o tanecnikovi. Tanecnik nebyl přidán."))
+		
+		return redirect("tanecnici_prehled")
+	
 	else: 
 		form = TanecnikForm
 		if 'submitted' in request.GET:
 			submitted = True
 
 	return render(request, "web_app/pridat_tanecnika.html", {'form': form, 'submitted': submitted, })
+
 
 
 
@@ -154,17 +163,23 @@ def upravit_tanecnika(request, pk):
 # tanecni jednotka 
 
 @login_required(login_url="login")
-def pridat_tj(request):
+def pridat_tj(request, pk):
+	
+
+	klub = Profil.objects.get(id=pk)
+	
+	form = TanecniJednotkaForm(initial={'klub': klub})
+	
 	submitted = False
 	if request.method == "POST":
-		form = TanecniJednotkaForm(request.POST)
+		form = TanecniJednotkaForm(initial={'klub': klub})
 		if form.is_valid():
 			form.save()
 			messages.success(request, ("Taneční jednotka byla úspěšně přidána."))
 			return redirect('tanecni_jednotky_prehled')
 
 	else:
-		form = TanecniJednotkaForm
+		form = TanecniJednotkaForm({'klub': klub})
 		if 'submitted' in request.GET:
 			submitted = True
 
@@ -180,7 +195,7 @@ def smazat_tj(request, pk):
 	tanecni_jednotka.delete()
 	messages.success(request, ("Taneční jednotka byla úspěšně smazána."))
 	
-	return redirect('Tanecni_jednotky_prehled')
+	return redirect('klub')
 
 
 
@@ -205,7 +220,7 @@ def upravit_tj(request, pk):
 	if form.is_valid():
 		form.save()
 		messages.success(request, ('Informace o Taneční jednotce byly změněny'))
-		return redirect('tanecni_jednotky_prehled')
+		return redirect('klub')
 	else:
 		return render(request, "web_app/upravit_tj.html", {'tanecni_jednotka': tanecni_jednotka, 'form': form})
 
@@ -216,11 +231,10 @@ def tanecni_jednotka(request, pk):
 
 	tanecni_jednotka = Tanecni_jednotka.objects.get(id=pk)
 
-	tanecnici = Tanecni_jednotka.objects.select_related().filter(id=pk)
-
-
-
-	return render(request, "web_app/tanecni_jednotka.html", {'tanecni_jednotka': tanecni_jednotka, 'tanecnici': tanecnici})
+	tanecnici = Tanecnik.objects.filter(klub_id=pk)
+	
+	return render(request, "web_app/tanecni_jednotka.html", {'tanecni_jednotka': tanecni_jednotka,
+	 'tanecnici': tanecnici })
 
 
 

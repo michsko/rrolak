@@ -16,8 +16,7 @@
 	    	<br>
 		<form action="" method="POST" enctype="multipart/form-data">
 			{% csrf_token %}
-			{{form.media}}
-			{{form.as_p }}
+			{{form.as_p}}
 			<input type="submit" value="Přidat" name="" class="btn btn-primary">
 
 		</form>

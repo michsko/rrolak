@@ -4,8 +4,8 @@
 
 <div class="container-md">
 	<br><br><br>
-	<img class="img=fluid " src="{{klub_profile.logo_klub.url}}" style="width: 250px; height: 250px; border-radius: 60px; padding: 10px;"><br>
-	<h3 class="">&nbsp;&nbsp;<b>{{klub_profile.klub}}</b></h3><br>
+	<img class="img=fluid " src="{{profil_user_object.logo_klub.url}}" style="width: 250px; height: 250px; border-radius: 60px; padding: 10px;"><br>
+	<h3 class="">&nbsp;&nbsp;<b>{{profil_user_object.klub}}</b></h3><br>
 
 		
 	<ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -64,12 +64,12 @@
 				
 		    <div class="col-md-8">
 				<div class="card-body">
-					<h3 class=""><b>{{klub_profile.klub}}</b></h3><br>
-					<td><p class="card-title"><b>Adresa: </b>{{klub_profile.adresa}}</b></p><td><br>
+					<h3 class=""><b>{{profil_user_object.klub}} {{profil_user_object.id}} {{ user_object.id }}</b></h3><br>
+					<td><p class="card-title"><b>Adresa: </b>{{profil_user_object.adresa}}</b></p><td><br>
 					
-					<td><p class="card-text"><b>Email: </b> {{klub_profile.email}} </p><td>
-			        <td><p class="card-text"><b>Telefon: </b> {{klub_profile.telefon}} </p><td>
-			        <td><p class="card-text"><b>Informace: </b><br><br>{{klub_profile.info}} </p><td>
+					<td><p class="card-text"><b>Email: </b> {{profil_user_object.email}} </p><td>
+			        <td><p class="card-text"><b>Telefon: </b> {{profil_user_object.telefon}} </p><td>
+			        <td><p class="card-text"><b>Informace: </b><br><br>{{profil_user_object.info}} </p><td>
 				
 				
 			    </div>
@@ -197,7 +197,7 @@
   	<div class="container-md" style=" min-height: 100vh; min-width: 65vw;">
 
   	<br>
-       <a  href="{% url 'pridat_tj' %}" class="btn btn-secondary ">⊕ přidat jednotku</a>
+       <a  href="{% url 'pridat_tj' user_object.id %}" class="btn btn-secondary ">⊕ přidat jednotku</a>
   	<br><br>
   	<div style="display: flex; flex-direction: row; flex-wrap: wrap">
 		

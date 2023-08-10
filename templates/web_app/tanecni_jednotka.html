@@ -11,6 +11,7 @@
 		<table class="table table-striped">
     <thead>
       <tr>
+      	<th>Klub</th>
         <th>Fotografie</th>
         <th>Jméno</th>
         <th>Příjmení</th>
@@ -31,7 +32,7 @@
       </tr>
     </thead>
     
-      {% for tanecnik in tanecnici_prehled %}
+      {% for tanecnik in tanecnici %}
       <tbody>  
       <tr>
         <td>{{tanecnik.klub}}</td>
@@ -56,14 +57,11 @@
         <td><h6 class="noreg"><b>x</b></h6></td>
         {% endif %}
 
-
-
         {% if tanecnik.doping %}
         <td><a href="{{tanecnik.doping.url}}" type="button" class="btn btn-secondary" download>DOP</a></td>
          {% else %}
         <td><h6 class="noreg"><b>x</b></h6></td>
         {% endif %}
-
 
 
         {% if tanecnik.Dny_do_nove_registrace_csar == "Registrace ČSAR vypršela." %}
@@ -95,7 +93,7 @@
   </table>
 
 
-				</div>
+			
 				<div style="float:right;">
 				
 
@@ -107,7 +105,7 @@
 
 			</div>
 		</div>
-    
+    </div>
 </div>
 </div>
 {% endblock %}
