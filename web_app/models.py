@@ -44,23 +44,15 @@ class Tanecnik(models.Model):
 	zdravotni_prohlidka_potvr = models.FileField('Zdravotní prohlídka', upload_to='zdravotni_prohlidka/', null=True, blank=True)
 	pas = models.FileField('Kopie pasu', upload_to='kopie_pasu/', null=True, blank=True)
 	doping = models.FileField('Dopingove prohlašení', upload_to='dopingove_prohlaseni/', null=True, blank=True)
-	
-
-
 	registr_csar = models.BooleanField('Registrace csar', default=False, null=True)
 	datum_registrace = models.DateField(auto_now_add=True, null=True, blank=True)
 	registrace_do = models.DateField(default=platnost, null=True, blank=True)
-	
-	
 	registr_zavodni_csar = models.BooleanField('Zavodni registrace', default=False, null=True)
 	datum_zavodni_registrace_csar = models.DateField(auto_now_add=True, null=True, blank=True)
 	zavodni_registrace_do = models.DateField(default=platnost, null=True, blank=True)
-	
-
 	registr_wrrc = models.BooleanField('Registrace wrrc', default=False, null=True)
 	datum_registrace_wrrc = models.DateField(auto_now_add=True, null=True, blank = True)
 	registrace_wrrc_do = models.DateField(default=platnost, null=True, blank=True)
-	
 	tanecnik = models.BooleanField('Tanečník', default=False, blank=True, null=True)
 	trener = models.BooleanField('Trenér', default=False, blank=True, null=True)
 	porotce = models.BooleanField('Porotce', default=False, blank=True, null=True)
